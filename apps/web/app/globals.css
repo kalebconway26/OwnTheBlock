@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+/* OwnTheBlock design tokens: "Navy & Gold" (2026-11-04 redesign).
+   Token names predate the redesign: "green" is now the primary brand NAVY, "gold" is earnings,
+   "pos" is the green used only for positive change, "brick" is negatives / blocked actions.
+   All text pairs meet WCAG AA (small gold text uses --gold-ink). */
+:root {
+  --cream: #ffffff;
+  --paper: #ffffff;
+  --card: #f4f6fa;
+  --line: #e7e9ef;
+  --ink: #0c1526;
+  --muted: #5d6678;
+  --green: #14306b;
+  --green-2: #1d428f;
+  --green-soft: #e6ecf7;
+  --gold: #d9a21b;
+  --gold-ink: #8a6400;
+  --gold-soft: #fbf1d6;
+  --pos: #0f8a5f;
+  --pos-soft: #e3f4ec;
+  --brick: #b4372a;
+  --brick-soft: #f8e3df;
+  --sky: #e6ecf7;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-pos: var(--pos);
+  --color-pos-soft: var(--pos-soft);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-green: var(--green);
+  --color-green-2: var(--green-2);
+  --color-green-soft: var(--green-soft);
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+  --color-gold-soft: var(--gold-soft);
+  --color-brick: var(--brick);
+  --color-brick-soft: var(--brick-soft);
+  --color-sky: var(--sky);
+  --font-sans: var(--font-brand), system-ui, sans-serif;
+}
+
+html,
+body {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-brand), system-ui, sans-serif;
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Big, thumb-friendly range sliders. */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 44px;
+  background: transparent;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  margin-top: -10px;
+  border-radius: 999px;
+  background: var(--green);
+  border: 3px solid var(--paper);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.25);
+}
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--green);
+  border: 3px solid var(--paper);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--green-2);
+  outline-offset: 2px;
+}
+
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom), 0px);
+}
+
+/* Phone frame: on a computer, show the app inside an iPhone 14/15 outline (390 x 844).
+   On phones (narrow screens) every wrapper is display: contents, so nothing changes. */
+.pf-stage,
+.pf-device,
+.pf-screen {
+  display: contents;
+}
+.pf-status,
+.pf-home {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    background: radial-gradient(ellipse at top, #1d428f 0%, #0b1a3d 55%, #060e22 100%);
+  }
+  .pf-stage {
+    display: flex;
+    height: 100dvh;
+    align-items: center;
+    justify-content: center;
+  }
+  .pf-device {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: none;
+    width: 390px;
+    height: 844px;
+    border-radius: 55px;
+    overflow: hidden;
+    background: var(--paper);
+    /* bezel + side frame + drop shadow */
+    box-shadow:
+      0 0 0 11px #0d0f14,
+      0 0 0 13px #3a3f4b,
+      0 30px 80px rgba(0, 0, 0, 0.55);
+  }
+  /* shrink the whole phone on short windows so it always fits */
+  @media (max-height: 900px) { .pf-device { zoom: 0.9; } }
+  @media (max-height: 820px) { .pf-device { zoom: 0.8; } }
+  @media (max-height: 730px) { .pf-device { zoom: 0.7; } }
+  @media (max-height: 640px) { .pf-device { zoom: 0.6; } }
+
+  .pf-status {
+    position: relative;
+    display: flex;
+    flex: none;
+    height: 47px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 30px 0 44px;
+    color: var(--ink);
+    background: var(--paper);
+    font-size: 16px;
+    font-weight: 600;
+    z-index: 60;
+  }
+  .pf-icons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    fill: currentColor;
+  }
+  .pf-island {
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    width: 122px;
+    height: 35px;
+    transform: translateX(-50%);
+    border-radius: 20px;
+    background: #000;
+  }
+  .pf-screen {
+    position: relative;
+    display: block;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    /* makes position: fixed bars (tab bar, invest bar, sheets) stick to the phone, not the window */
+    transform: translateZ(0);
+  }
+  .pf-screen::-webkit-scrollbar {
+    display: none;
+  }
+  /* "full screen height" inside the phone means the phone screen, not the browser window */
+  .pf-screen .min-h-dvh {
+    min-height: 100%;
+  }
+  .pf-screen .max-h-\[85vh\] {
+    max-height: 85%;
+  }
+  /* room for the home indicator, like a real iPhone */
+  .pf-screen .pb-safe {
+    padding-bottom: 26px;
+  }
+  .pf-home {
+    position: absolute;
+    display: block;
+    bottom: 8px;
+    left: 50%;
+    width: 134px;
+    height: 5px;
+    transform: translateX(-50%);
+    border-radius: 99px;
+    background: #0c1526;
+    z-index: 70;
+    pointer-events: none;
+  }
+}

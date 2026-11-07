@@ -1,0 +1,253 @@
+{
+  "network": "hardhat",
+  "chainId": 31337,
+  "deployedAt": "2026-11-03T04:41:04.353Z",
+  "contracts": {
+    "registry": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
+    "usdc": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+    "token": "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+    "treasury": "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
+    "raise": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
+    "governor": "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82"
+  },
+  "gas": {
+    "distribute": 130302,
+    "claimAverage": 67067
+  },
+  "transactions": [
+    {
+      "step": "Deed fingerprint stored on-chain",
+      "hash": "0xaf50bcdf363a43c0322dff189e23427ecc031da5c90247a0b6d554c17828d92c",
+      "gasUsed": 26779,
+      "status": "ok"
+    },
+    {
+      "step": "Appraisal fingerprint stored on-chain",
+      "hash": "0x77c0479228feb00f71fffe704d2b31f454a8fed1d4d25740a3747b58a16b8255",
+      "gasUsed": 26839,
+      "status": "ok"
+    },
+    {
+      "step": "ID check passed: jenkins (resident)",
+      "hash": "0x6e72aedf088cfd2cfd75a5d1fb754ba94e4741926c00fd987b7a1d08ae2b8f2e",
+      "gasUsed": 70940,
+      "status": "ok"
+    },
+    {
+      "step": "ID check passed: jasmine (resident)",
+      "hash": "0xd1b0b55b40cca8d231d78daee1caa6f26d62b1f1aa054d3b6914b6ae6e1dfef8",
+      "gasUsed": 70928,
+      "status": "ok"
+    },
+    {
+      "step": "ID check passed: tasha (resident)",
+      "hash": "0x8e8ecc9b865f2b03d6abbe738291e69ec3a94b94f75d98cd2c22e3a8c3b74bf0",
+      "gasUsed": 70940,
+      "status": "ok"
+    },
+    {
+      "step": "ID check passed: alumna",
+      "hash": "0xbb89d7a2454fed326a39bbe4bc168e156a8ec0c4ae87fce4217cc9a984051297",
+      "gasUsed": 70928,
+      "status": "ok"
+    },
+    {
+      "step": "ID check passed: church (resident)",
+      "hash": "0xee161c520d7e739b89161333eafa39851a77b891e7bb295383b5127414aaf54d",
+      "gasUsed": 70940,
+      "status": "ok"
+    },
+    {
+      "step": "Unverified outsider tries to invest: refused",
+      "hash": null,
+      "gasUsed": 0,
+      "status": "refused by contract",
+      "reason": "NotVerified"
+    },
+    {
+      "step": "Ms. Jenkins commits $2,000 (resident window)",
+      "hash": "0x0f3605b68838ba528b3e8386a1a592f3682b942520c36aa81dbdcd43e242ced3",
+      "gasUsed": 165770,
+      "status": "ok"
+    },
+    {
+      "step": "Jasmine commits $2,000 (resident window)",
+      "hash": "0xdec58c84baaddd969baeba17e4d5fa6129d7d797603f887b2e5bc81ef9a7bf87",
+      "gasUsed": 114470,
+      "status": "ok"
+    },
+    {
+      "step": "Tasha commits $2,000 (resident window)",
+      "hash": "0xa305031e34fb9717ad3ecf1432184ff8df500c47ebb8052a9957ab618ca7213d",
+      "gasUsed": 114470,
+      "status": "ok"
+    },
+    {
+      "step": "Alumna in Atlanta tries during resident window: refused",
+      "hash": null,
+      "gasUsed": 0,
+      "status": "refused by contract",
+      "reason": "ResidentsOnly"
+    },
+    {
+      "step": "Alumna in Atlanta commits $2,000 (open window)",
+      "hash": "0x44886efff72c623b1c3ab4a39311ecf33732d523313e73583b8656f66747ee24",
+      "gasUsed": 114462,
+      "status": "ok"
+    },
+    {
+      "step": "Church commits $2,000",
+      "hash": "0x27d245521a81f55e0772edb1db6ca5130fe52ceb3f2e033f0a396bacdb188c18",
+      "gasUsed": 114462,
+      "status": "ok"
+    },
+    {
+      "step": "Raise closes: goal met, money to the house's treasury",
+      "hash": "0x16437dd318883c36b65ce920741878f8102f96febd4497995c609bcba464e946",
+      "gasUsed": 76258,
+      "status": "ok"
+    },
+    {
+      "step": "jenkins receives 200 tokens",
+      "hash": "0xe59d2935da84ec126582fb7d51aac18270792953da10389e911dedaa10839c05",
+      "gasUsed": 259484,
+      "status": "ok"
+    },
+    {
+      "step": "jasmine receives 200 tokens",
+      "hash": "0x16eb26874868312b7edf1836c1ee5041c5d73223ab1327164c6ddb40e78eb1bf",
+      "gasUsed": 210869,
+      "status": "ok"
+    },
+    {
+      "step": "tasha receives 200 tokens",
+      "hash": "0x4b73cc19bc50864394b6e44d126c39102abd380c5394633e2aed129930177408",
+      "gasUsed": 210869,
+      "status": "ok"
+    },
+    {
+      "step": "alumna receives 200 tokens",
+      "hash": "0x4dacd7bbb7f838874fb771822463e430e0f7f4696e6bb5f9d78edf65346ef76b",
+      "gasUsed": 205770,
+      "status": "ok"
+    },
+    {
+      "step": "church receives 200 tokens",
+      "hash": "0x46f7940ab6b7cac586c29e631a6301f3976769da361bc54f057e32655acd0bb0",
+      "gasUsed": 210869,
+      "status": "ok"
+    },
+    {
+      "step": "Manager proposes $3,000 roof payment with invoice fingerprint",
+      "hash": "0x255ff1dce1e27de69c786784b39d7a1b114ca4eb98d007519313569de9b1f83a",
+      "gasUsed": 140230,
+      "status": "ok"
+    },
+    {
+      "step": "Manager tries to approve own payment: refused",
+      "hash": null,
+      "gasUsed": 0,
+      "status": "refused by contract",
+      "reason": "NotAllowed"
+    },
+    {
+      "step": "Steward co-signs: contractor paid",
+      "hash": "0xbbefadc6206f15aa88214cc365070660e85e212c9c540b7bf3f5c41f873dcf69",
+      "gasUsed": 84889,
+      "status": "ok"
+    },
+    {
+      "step": "Tenant's on-time rent recorded",
+      "hash": "0x2ec4921999df9fbcb90b186a405f835b3e80f06383d3b05afd6526ddf1d7fd77",
+      "gasUsed": 26336,
+      "status": "ok"
+    },
+    {
+      "step": "Manager deposits $700 net rent: split across all owners in one transaction",
+      "hash": "0x3b24aa71054744ac8d948e8eeb94e7730626dcc2b10fab57c8f8560dd2ec53c6",
+      "gasUsed": 130302,
+      "status": "ok"
+    },
+    {
+      "step": "jenkins claims $140 payout",
+      "hash": "0xec20d44b66b083db142d58e4a1e06245056348ee10cc774996d8a7707197d63b",
+      "gasUsed": 68027,
+      "status": "ok"
+    },
+    {
+      "step": "jasmine claims $140 payout",
+      "hash": "0x58f4b2b463a1877cca311ed712efd722a6ef097d96520646686140db0f4d7f07",
+      "gasUsed": 68027,
+      "status": "ok"
+    },
+    {
+      "step": "tasha claims $140 payout",
+      "hash": "0x581b7893277399d6f0c401d9bb08a4e969bcbfae07756f6be26b99387c56568c",
+      "gasUsed": 68027,
+      "status": "ok"
+    },
+    {
+      "step": "alumna claims $140 payout",
+      "hash": "0xe895c39fe1f3c92d89895dd0fe2371d8a77bb37a53726d9c1da6dbaaa8b2760e",
+      "gasUsed": 68027,
+      "status": "ok"
+    },
+    {
+      "step": "church claims $140 payout",
+      "hash": "0xef0b65d43692c14b15e19f1f95b351111a6720598acfd7e77457e44febc97f36",
+      "gasUsed": 63227,
+      "status": "ok"
+    },
+    {
+      "step": "Jasmine tries to sell during the 12-month lockup: refused",
+      "hash": null,
+      "gasUsed": 0,
+      "status": "refused by contract",
+      "reason": "Locked"
+    },
+    {
+      "step": "Manager tries to raise rent 10%: refused (3% cap, once a year)",
+      "hash": null,
+      "gasUsed": 0,
+      "status": "refused by contract",
+      "reason": "RentChangedTooRecently"
+    },
+    {
+      "step": "Ms. Jenkins proposes lowering the per-person cap to 15%",
+      "hash": "0xa74ad65de036c31dc2d9d10372f887ad1202b670be3c2543122ba9c5710d12bb",
+      "gasUsed": 130227,
+      "status": "ok"
+    },
+    {
+      "step": "jenkins votes yes",
+      "hash": "0x8a807c2e3fcb5be31b770b1ec32425e7235fbc645922db0717052e65e5655321",
+      "gasUsed": 89603,
+      "status": "ok"
+    },
+    {
+      "step": "jasmine votes yes",
+      "hash": "0xad5381c819a4a447ba71a8de60b16328bced0e27ac4156e83f6b34c0a7a9bebe",
+      "gasUsed": 72503,
+      "status": "ok"
+    },
+    {
+      "step": "tasha votes yes",
+      "hash": "0x13e6f607beb4ee524193cdd9bc9ac1d500200276329865f05541d0fa17b11974",
+      "gasUsed": 72503,
+      "status": "ok"
+    },
+    {
+      "step": "church votes yes",
+      "hash": "0xdb47599a330b7a63b196301a2fbfc2fb541384aca4f82673f31ecf2f1c20f0d4",
+      "gasUsed": 72503,
+      "status": "ok"
+    },
+    {
+      "step": "Rule change executed before the 30-day wait: refused",
+      "hash": null,
+      "gasUsed": 0,
+      "status": "refused by contract",
+      "reason": "TimelockActive"
+    }
+  ]
+}

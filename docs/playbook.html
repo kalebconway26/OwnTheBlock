@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OwnTheBlock Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --green:#1f5d3a; --green-l:#e6f0e9; --gold:#b8860b; --gold-l:#fbf3dc; --brick:#a33a2b; --brick-l:#f8e4e0; --cream:#fbf8f1; --ink:#1d1d1b; --muted:#5e5b55; --line:#ddd6c8; }
+  @page { size: Letter; margin: 0.6in 0.6in 0.7in; }
+  * { box-sizing: border-box; }
+  body { font-family: Inter, "Segoe UI", Arial, sans-serif; color: var(--ink); background:#fff; font-size: 10.5pt; line-height: 1.45; margin:0; }
+  h1 { font-size: 20pt; color: var(--green); margin: 0 0 6px; page-break-before: always; padding-top: 4px; border-bottom: 3px solid var(--gold); padding-bottom: 6px; }
+  h1.first { page-break-before: avoid; }
+  h2 { font-size: 13.5pt; color: var(--green); margin: 18px 0 6px; page-break-after: avoid; }
+  h3 { font-size: 11pt; margin: 14px 0 4px; page-break-after: avoid; }
+  p { margin: 5px 0 8px; }
+  ul, ol { margin: 4px 0 8px; padding-left: 20px; }
+  li { margin: 2px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 9.3pt; page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th { background: var(--green); color: #fff; text-align: left; padding: 5px 6px; font-weight: 600; }
+  td { border-bottom: 1px solid var(--line); padding: 5px 6px; vertical-align: top; }
+  tr:nth-child(even) td { background: #faf8f3; }
+  td.num { text-align: right; white-space: nowrap; } th.num { text-align: right; }
+  .total td { font-weight: 700; border-top: 2px solid var(--green); }
+  .box { border-radius: 8px; padding: 10px 12px; margin: 10px 0; page-break-inside: avoid; }
+  .key { background: var(--green-l); border-left: 5px solid var(--green); }
+  .warn { background: var(--brick-l); border-left: 5px solid var(--brick); }
+  .gold { background: var(--gold-l); border-left: 5px solid var(--gold); }
+  .tag { display:inline-block; font-size: 7.8pt; font-weight: 700; padding: 1px 6px; border-radius: 10px; color:#fff; white-space: nowrap; }
+  .p0 { background: var(--brick); } .p1 { background: var(--gold); } .p2 { background: var(--green); }
+  .on { background:#2b5f8a; } .off { background:#7a6a55; } .both { background:#555; }
+  .ready { background: var(--green); } .fix { background: var(--brick); }
+  .muted { color: var(--muted); }
+  .small { font-size: 8.8pt; }
+  .cover { height: 9.4in; display:flex; flex-direction:column; justify-content:center; background: var(--cream); padding: 0 0.5in; border-radius: 12px; }
+  .cover h1 { page-break-before: avoid; border: none; font-size: 34pt; margin-bottom: 4px; }
+  .cover .sub { font-size: 15pt; color: var(--gold); font-weight: 700; margin-bottom: 26px; }
+  .toc { columns: 2; column-gap: 28px; font-size: 10pt; }
+  .toc li { break-inside: avoid; }
+  .q { page-break-inside: avoid; margin: 0 0 9px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 7px; }
+  .q b.qq { display:block; margin-bottom: 2px; }
+  .step { display:grid; grid-template-columns: 28px 1fr; gap: 8px; margin: 8px 0; page-break-inside: avoid; }
+  .step .n { background: var(--green); color:#fff; border-radius: 50%; width: 24px; height: 24px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size: 9pt; }
+  .flow { font-family: Consolas, "Courier New", monospace; font-size: 8.8pt; background:#f4f1ea; padding: 8px 10px; border-radius: 6px; white-space: pre; line-height: 1.35; page-break-inside: avoid; overflow: hidden; }
+  .two { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .footer-note { font-size: 8pt; color: var(--muted); margin-top: 18px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1 class="first">OwnTheBlock</h1>
+  <div class="sub">The full playbook: fixes, operating plan, money, questions and next steps</div>
+  <p style="font-size:12pt;max-width:6in">This document covers OwnTheBlock from start to finish: how a property is found, bought and owned through an LLC; where the blockchain fits; who is involved; how everyone makes money and how long it takes; what judges will ask; and what to build next.</p>
+  <p class="muted" style="margin-top:24px">Prepared Nov 2, 2026 for the case competition · Based on the Master Build Prompt &amp; Product Spec (Oct 24, 2026) and the app in <code>~/owntheblock</code></p>
+  <div class="box warn" style="margin-top:28px;max-width:6.5in"><b>Read this first.</b> All dollar figures are estimates for planning and pitching. Tax rates, insurance costs and Reg CF rules must be confirmed with a securities attorney and a CPA before any real money is involved. Items marked "verify" are the most important ones to check.</div>
+</div>
+
+<h1>Contents</h1>
+<ol class="toc">
+  <li>The verdict in one page</li>
+  <li>Fix list: what to change, in priority order</li>
+  <li>The operating plan, start to finish (Phases 0–10)</li>
+  <li>How the blockchain fits, step by step</li>
+  <li>The people: every role and how residents get involved</li>
+  <li>How a property gets bought: six scenarios</li>
+  <li>Worked example: Jasmine buys a piece of a house</li>
+  <li>The money: how profit is made and how long ROI takes</li>
+  <li>Business deals: fixing the barbershop terms</li>
+  <li>How OwnTheBlock itself makes money</li>
+  <li>Judge question bank with answers</li>
+  <li>Comments on the spec, section by section</li>
+  <li>Brainstorm: ways to make it better</li>
+  <li>Roadmap to fully functioning</li>
+  <li>Pre-competition checklist</li>
+  <li>Glossary</li>
+</ol>
+
+<!-- ===================================================== 1 -->
+<h1>1. The verdict in one page</h1>
+
+<div class="two">
+  <div class="box key"><b>What's strong</b>
+    <ul>
+      <li>A clear, emotional story (Ms. Jenkins, the eyesore next door, HBCU neighborhoods).</li>
+      <li>The Block Simulator: every number links to its formula, risk events show payouts dropping, 43 automated tests pass.</li>
+      <li>Honesty built in: on-chain vs off-chain labels, "estimates, not guarantees," downside cases.</li>
+      <li>A real legal path (Reg CF + one LLC per asset) instead of hand-waving.</li>
+      <li>The Charter concept: "the community decides, the code enforces."</li>
+    </ul>
+  </div>
+  <div class="box warn"><b>What will hurt you</b>
+    <ul>
+      <li><b>No blockchain is running yet.</b> It's a crypto competition, and every transaction hash in the app is pretend.</li>
+      <li><b>The returns are overstated.</b> With every real cost included, the spec's house earns about 3.5% a year, not 8.7%.</li>
+      <li><b>Rent-to-own math fails.</b> It uses up the whole platform fee, and the tenant needs 88 years to reach a down payment.</li>
+      <li><b>The barbershop deal is about 20% APR.</b> That's hard to square with "no predatory loans."</li>
+      <li><b>Legal conflicts:</b> a smart-contract escrow, the Neighborhood Fund under Reg CF, and a peer-to-peer marketplace.</li>
+      <li><b>No outside validation:</b> no real residents, owners or partners yet.</li>
+    </ul>
+  </div>
+</div>
+
+<h2>The one insight that fixes the economics</h2>
+<div class="box gold">
+<p><b>Don't buy houses at full price. Rescue distressed houses below their repaired value.</b></p>
+<p>At full price, a $10 token is worth about <b>$8.55 on day one</b> after closing and offering costs. That leaves investors earning <b>~3.5% a year</b>, less than a savings account.</p>
+<p>Buy a boarded-up house for $90k, put $35k into repairs, and it's worth about $150k. Day-one value becomes <b>~$10.63 per $10 token</b>, and the return rises to <b>~8.7% a year</b>.</p>
+<p><b>The social mission and the investment math point the same way:</b> fixing eyesores is where the money is made. Make "Rescue the Eyesore" the core model, not a side feature.</p>
+</div>
+
+<h2>The three changes to make before you present</h2>
+<ol>
+  <li><b>Put real transactions on Base Sepolia.</b> Deploy at least the token, the raise, the payout contract and test USDC, and show one buy and one claim on the block explorer.</li>
+  <li><b>Replace the spec's returns with the honest model (Section 8).</b> Lead with the distressed-home case and show the full-price case as the reason you don't buy retail.</li>
+  <li><b>Fix rent-to-own and the business terms (Sections 9 and 13).</b> Use a lease-purchase option and a 1.25×–1.3× cap.</li>
+</ol>
+
+<!-- ===================================================== 2 -->
+<h1>2. Fix list: what to change, in priority order</h1>
+<p><span class="tag p0">P0</span> = fix before presenting · <span class="tag p1">P1</span> = fix or have a ready answer · <span class="tag p2">P2</span> = improve when time allows. "Where" says whether the fix is in the pitch/doc, the app code, or the real-world plan.</p>
+
+<table>
+<tr><th>#</th><th>Problem</th><th>Why it matters</th><th>Fix</th><th>Where</th><th></th></tr>
+<tr><td>1</td><td>No smart contracts, wallet or testnet transactions</td><td>The competition is about blockchain. Spec §4.5 and the demo script promise a live testnet buy.</td><td>Build Milestone 3 (minimum version): token, raise, payout contract, test USDC on Base Sepolia. Add a "Live testnet" toggle (Section 14).</td><td>App</td><td><span class="tag p0">P0</span></td></tr>
+<tr><td>2</td><td>Not deployed; no public link</td><td>Judges can't open it on their phones.</td><td>Deploy to Vercel. Put a QR code on your title slide.</td><td>App</td><td><span class="tag p0">P0</span></td></tr>
+<tr><td>3</td><td>Raise budget leaves out closing, legal, CPA, portal and the 3% fee</td><td>$150k turns into ~$175.5k, and yield drops from 6.8% to ~3.6%.</td><td>Use full sources and uses (Section 8). Show the day-one token value honestly.</td><td>Doc + app (<code>lib/finance</code>, <code>lib/demo.ts</code>)</td><td><span class="tag p0">P0</span></td></tr>
+<tr><td>4</td><td>Rent-to-own uses the entire platform fee or breaks the reserve rule; 88 years to a down payment</td><td>The Tasha persona falls apart under one question.</td><td>Replace with a lease-purchase option plus a down-payment credit (Section 13, idea 4).</td><td>Doc + app (Me tab, Impact)</td><td><span class="tag p0">P0</span></td></tr>
+<tr><td>5</td><td>Barbershop note is ~20% APR</td><td>Contradicts "no predatory loans."</td><td>Cap at 1.25×–1.3× with 4–5% of revenue (~12–17% APR). Compare against merchant cash advances, not SBA loans.</td><td>Doc + app</td><td><span class="tag p0">P0</span></td></tr>
+<tr><td>6</td><td>The escrow smart contract conflicts with Reg CF</td><td>Reg CF requires a bank or broker-dealer escrow.</td><td>Dollars go to the portal's escrow bank. The contract records commitments and mints tokens at closing (Section 4).</td><td>Doc + contracts</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>7</td><td>The Neighborhood Fund holds other LLCs' tokens</td><td>A fund holding securities is likely an investment company, and those can't use Reg CF.</td><td>Make it a "Block Fund LLC" that <b>owns houses directly</b>, not tokens (Section 13, idea 1).</td><td>Doc</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>8</td><td>A peer-to-peer marketplace after 12 months</td><td>Running an order book without registration is an unregistered exchange.</td><td>Phase 1: no marketplace. Phase 2: partner with a registered trading platform (an ATS). Meanwhile, offer limited buyback windows from the fund.</td><td>Doc + app copy</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>9</td><td>Treasury multisig: the manager plus OwnTheBlock can spend without the community</td><td>Undercuts "community control."</td><td>Require the steward's signature on every spend, or use 3-of-5 with two elected resident reps. Large spends wait 7 days.</td><td>Contracts + doc</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>10</td><td>Rules contradict each other: 10% vs 2% caps, per-wallet vs per-identity, and Structure C's 53% family stake</td><td>Judges who read the doc will notice.</td><td>One rule: caps are per verified person. Contributing heirs get a stated exception approved in the Charter.</td><td>Doc</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>11</td><td>"Affordable" metric (30% of AMI) is too easy to pass; 86% of market is a fixed number in the code</td><td>"Affordable to whom?"</td><td>Measure against the <i>neighborhood's</i> median income. Compute rent vs market from data. Remove fixed numbers in <code>lib/world/index.ts:621-661</code>.</td><td>App + doc</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>12</td><td>Investors profit from rising rents and from selling at market value</td><td>Looks like gentrification with a cut for locals.</td><td>The default exit is a sale to the tenant, a land trust or the community at appraisal, with a deed restriction. Rent caps also apply when a new tenant moves in.</td><td>Doc + Charter</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>13</td><td>One K-1 per investor per LLC for $0.68 of income</td><td>The tax paperwork costs more than the income.</td><td>Pooled fund (one tax form per person). Ask a CPA about a REIT election for 1099-DIV forms instead.</td><td>Doc</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>14</td><td>The simulator assumes only 40% of investors are local (<code>RESIDENT_SHARE = 0.4</code>)</td><td>Contradicts "the community owns it."</td><td>Show the local share honestly and add the 51% local floor as a Charter option that blocks outside buys.</td><td>App</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>15</td><td>No named first-loss partner</td><td>It's the answer to business failure.</td><td>Name target types: bank investments that count toward its Community Reinvestment Act (CRA) obligations, foundation impact investments, city housing funds. Get one letter of interest.</td><td>Real world</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>16</td><td>All fictional data and placeholder names (Sample St, Placeholder Ln)</td><td>Feels like a class project.</td><td>Rename to believable fictional streets. Add one real validation item: a survey, an LOI or a partner meeting.</td><td>App + pitch</td><td><span class="tag p1">P1</span></td></tr>
+<tr><td>17</td><td>Fund tokens always show $10; homes gain 3% a year automatically</td><td>"Where does that value come from?"</td><td>Compute NAV per spec §6.3. Value homes from the last appraisal and label them as estimates.</td><td>App (<code>lib/world/index.ts:599</code>)</td><td><span class="tag p2">P2</span></td></tr>
+<tr><td>18</td><td>Missing features: Spanish, governance proposals, Charter screen, Pitch Board posting, admin, owner dashboard</td><td>The spec promises them.</td><td>Build the Charter screen and the proposal flow first, since they back your best answers.</td><td>App</td><td><span class="tag p2">P2</span></td></tr>
+<tr><td>19</td><td>Lost phone, death of an investor, unbanked users</td><td>Real-life gaps.</td><td>Passkey backup plus identity-verified recovery, a named beneficiary, a cash deposit partner.</td><td>Doc + app</td><td><span class="tag p2">P2</span></td></tr>
+<tr><td>20</td><td>The learning discount applies to "platform fee" in §3.7 but to the trading fee in §6.8</td><td>Small inconsistency.</td><td>Pick one: a discount on the trading fee, or bonus points.</td><td>Doc</td><td><span class="tag p2">P2</span></td></tr>
+</table>
+
+<!-- ===================================================== 3 -->
+<h1>3. The operating plan, start to finish</h1>
+<p>This is the whole life of one house, in order. Each phase lists what happens, who does it, whether it's on-chain or off-chain, how long it takes and what it costs. The example house is <b>310 Demo Ct</b>, a boarded-up home. Rename it to a believable street before the pitch.</p>
+
+<div class="flow">PHASE 0  Set up the company and partners            (once, months 0–3)
+PHASE 1  Find the property                              (week 0)
+PHASE 2  Vet it: title, appraisal, inspection, bids     (weeks 1–8)
+PHASE 3  Form the LLC, write the Charter, sign deal     (weeks 6–10)
+PHASE 4  File the offering and open the raise           (weeks 10–20)
+PHASE 5  Close the raise and buy the house              (weeks 20–24)
+PHASE 6  Renovate in stages                             (months 6–9)
+PHASE 7  Lease up and collect rent                      (month 9 →)
+PHASE 8  Pay investors every month                      (month 10 →)
+PHASE 9  Govern, report, pay taxes                      (ongoing)
+PHASE 10 Exit: tenant buys, community holds, or sale    (year 3–10)</div>
+
+<h2>Phase 0. Set up the company and partners (once)</h2>
+<table>
+<tr><th>Step</th><th>What</th><th>Who</th><th>Cost (estimate)</th></tr>
+<tr><td>0.1</td><td>Form <b>OwnTheBlock Inc.</b> (a public benefit corporation is a good fit for the mission). It is the sponsor and manager, not the owner of the houses.</td><td>Founders + attorney</td><td>$1–3k</td></tr>
+<tr><td>0.2</td><td>Hire a <b>securities attorney</b> to design the LLC template, operating agreement, token terms and Charter presets, and to review fair-housing issues.</td><td>Attorney</td><td>$15–40k first deal; less after (look for pro bono clinics)</td></tr>
+<tr><td>0.3</td><td>Sign with a <b>registered Reg CF funding portal</b> (or broker-dealer) that will host offerings and run the escrow bank.</td><td>Portal</td><td>~5–8% of each raise (verify)</td></tr>
+<tr><td>0.4</td><td>Sign with a <b>registered transfer agent</b> that accepts blockchain records as the official owner list.</td><td>Transfer agent</td><td>$1–5k/yr per issuer (verify)</td></tr>
+<tr><td>0.5</td><td>Choose a <b>property manager</b> (licensed NC broker) for leasing, rent collection and repairs.</td><td>PM company</td><td>8% of rent</td></tr>
+<tr><td>0.6</td><td>Line up <b>first-loss capital</b>: a bank's CRA investment, a foundation, the city. They absorb the first 10% of losses.</td><td>Partners</td><td>Their capital</td></tr>
+<tr><td>0.7</td><td>Recruit <b>stewards</b>: a neighborhood association, church, CDC or land trust that holds a governance seat.</td><td>Community</td><td>—</td></tr>
+<tr><td>0.8</td><td>Set up KYC (Persona), Coinbase Developer Platform (wallets, paymaster, onramp) and Pinata/IPFS.</td><td>Tech team</td><td>Free tiers to start</td></tr>
+<tr><td>0.9</td><td><b>Validate with residents</b>: survey 50+ people, hold 2 block meetings, get letters of interest from 1 homeowner/heir family and 1 business.</td><td>Founders</td><td>Time</td></tr>
+</table>
+
+<h2>Phase 1. Find the property</h2>
+<ul>
+  <li><b>Neighbors flag it</b> in the app ("Flag an eyesore": photo + address), or <b>stewards bring it</b> (land bank, city vacant-property list, church members, estate attorneys).</li>
+  <li>OwnTheBlock staff pull public records: owner of record, tax status, liens, code violations, and probate status if the owner died.</li>
+  <li>Screening rule: the after-repair value (ARV) must exceed all-in cost by at least 10%. If it doesn't, the deal doesn't proceed.</li>
+  <li><span class="tag off">Off-chain</span> The flag and the community upvotes can be recorded in the app. Optionally, post a hash of the flag on-chain to timestamp it.</li>
+</ul>
+
+<h2>Phase 2. Vet it (weeks 1–8)</h2>
+<table>
+<tr><th>Check</th><th>Who</th><th>What it answers</th><th>Typical cost</th></tr>
+<tr><td>Title search and title commitment</td><td>Title company / closing attorney</td><td>Who legally owns it? Any liens, judgments or missing heirs?</td><td>$300–800</td></tr>
+<tr><td>Independent appraisal (as-is <i>and</i> after-repair)</td><td>Licensed appraiser</td><td>Sets the price. <b>Rule: never pay above as-is appraised value.</b></td><td>$400–700</td></tr>
+<tr><td>Home inspection + sewer/roof if needed</td><td>Licensed inspector</td><td>What's broken.</td><td>$400–900</td></tr>
+<tr><td>Two contractor bids</td><td>Licensed contractors (local first)</td><td>Repair budget. Use the higher bid + 15% contingency.</td><td>Free</td></tr>
+<tr><td>Rent study</td><td>Property manager</td><td>Realistic rent and how fast it will rent.</td><td>Free</td></tr>
+<tr><td>Insurance quote (vacant + landlord)</td><td>Insurance agent</td><td>Must be bound before closing.</td><td>Quote</td></tr>
+</table>
+<p>Everything goes into the project's <b>document room</b> on the app. Each file's fingerprint (hash) is stored on IPFS and on-chain, so no one can quietly swap a document later. <span class="tag both">Both</span></p>
+
+<h2>Phase 3. Form the LLC, write the Charter, sign the deal (weeks 6–10)</h2>
+<ol>
+  <li>Form <b>"310 Demo Ct LLC"</b>, or a new series inside a pooled Block Fund LLC (recommended; see Section 13). OwnTheBlock Inc. is the <b>manager</b>. Investors are <b>members</b>. The steward holds a governance seat with a "golden share" veto over affordability rules.</li>
+  <li>The <b>operating agreement</b> says the official list of members is kept by the transfer agent, which mirrors the on-chain token registry. <b>1 token = 1 membership unit.</b></li>
+  <li>The neighborhood's <b>Charter</b> is attached: who can invest, caps, local floor, voting, rent cap, reserve, exit rules.</li>
+  <li>Sign a <b>purchase agreement</b> with the seller, contingent on the raise succeeding. The seller agrees to wait 90–120 days to close. A small refundable deposit ($1–2k, paid from OwnTheBlock's operating funds) holds the deal.</li>
+  <li><span class="tag on">On-chain</span> Deploy the asset's contracts: AssetToken, Raise, Treasury, Distributor, and RulesRegistry entries from the Charter.</li>
+</ol>
+
+<h2>Phase 4. File the offering and open the raise (weeks 10–20)</h2>
+<ol>
+  <li>The attorney prepares <b>Form C</b>: business plan, risks, use of funds, financials (CPA-reviewed if the raise is above about $124k; verify current thresholds), and the operating agreement. It's filed with the SEC.</li>
+  <li>The offering goes live on the <b>partner portal</b> and is mirrored in the OwnTheBlock app. Reg CF requires it to be public for at least 21 days before any sale is final.</li>
+  <li><b>Tier windows</b> (or the Charter's own rules): days 1–7 zip-code residents, days 8–14 students and alumni, day 15+ any verified U.S. investor.</li>
+  <li>Investors sign up (email or phone + passkey), pass KYC, take the 5-question risk quiz, and <b>commit</b> $10 or more. Money goes to the <b>escrow bank</b>. <span class="tag on">On-chain</span> The Raise contract records each commitment (amount, tier, timestamp) with no personal data.</li>
+  <li>Investors may <b>cancel up to 48 hours before the deadline</b> (Reg CF right). The app needs a Cancel button.</li>
+  <li>Protections: the $2,500 yearly limit for most people (Reg CF; higher for higher incomes), a 24-hour cooling-off on a first investment over $100, and a check-in if someone invests more than 10% of their stated monthly income.</li>
+</ol>
+
+<h2>Phase 5. Close the raise and buy the house (weeks 20–24)</h2>
+<ol>
+  <li><b>Goal not met by the deadline:</b> the escrow bank returns every dollar. The Raise contract marks all commitments refunded. <span class="tag on">On-chain</span></li>
+  <li><b>Goal met:</b> the escrow bank releases funds to the LLC's bank account. Tokens are minted to every investor's wallet in one transaction. <span class="tag on">On-chain</span> The transfer agent records the same owner list. <span class="tag off">Off-chain</span></li>
+  <li><b>Closing:</b> North Carolina uses attorneys for closings. The attorney pays off liens and back taxes from the purchase price, the seller signs the deed, and the deed is recorded at the Guilford County Register of Deeds in the LLC's name. <span class="tag off">Off-chain</span></li>
+  <li>The recorded deed, closing statement and insurance policy are uploaded. Their hashes are posted to the Money Trail. <span class="tag both">Both</span></li>
+</ol>
+
+<h2>Phase 6. Renovate in stages (months 6–9)</h2>
+<ul>
+  <li>Repair money sits in the LLC's Treasury, either as USDC (multisig) or in a bank account with its balance mirrored.</li>
+  <li>Pay contractors in <b>3–4 draws</b>: demolition/rough-in, systems, finishes, final. Each draw needs an invoice, inspection photos and two signatures (manager + steward). <span class="tag on">On-chain</span> Treasury.spend(to, amount, memo) with the document hash.</li>
+  <li><b>Overruns:</b> paid from the 15% contingency first. Beyond that, the community votes: pause, cut scope, or a small follow-on raise.</li>
+  <li>Hire local contractors first. This counts as an impact metric.</li>
+</ul>
+
+<h2>Phase 7. Lease up and collect rent (month 9 →)</h2>
+<ul>
+  <li>The property manager markets the home, with first notice to neighborhood families and existing tenants on the block. Tenant screening follows <b>fair-housing law</b>: written criteria applied the same way to everyone. No investor or neighbor picks the tenant.</li>
+  <li>Offer the <b>lease-purchase option</b> (Section 13, idea 4) at move-in.</li>
+  <li>The tenant pays rent in dollars (ACH, card or cash at a partner location). <span class="tag off">Off-chain</span> Rent is optionally reported to credit bureaus.</li>
+  <li><b>Late rent:</b> a hardship fund and payment plan first, mediation second, eviction only as a last resort, with the steward informed. Publish this policy.</li>
+</ul>
+
+<h2>Phase 8. Pay investors every month (month 10 →)</h2>
+<ol>
+  <li>The PM sends a monthly report: rent collected, each expense, reserve added. It's uploaded, and its hash stored.</li>
+  <li>Net cash is converted to USDC and deposited into the <b>Distributor</b> contract with the report hash. <span class="tag on">On-chain</span></li>
+  <li>Each token holder's share becomes claimable. Holders tap <b>Claim</b> (gas paid by OwnTheBlock) or turn on auto-claim/auto-reinvest. They can cash out to a bank through Coinbase Offramp.</li>
+</ol>
+
+<h2>Phase 9. Govern, report, pay taxes (ongoing)</h2>
+<ul>
+  <li>Proposals: repairs above the reserve limit, rent changes within the cap, sell/hold, refinance. Votes are on-chain through CommunityGovernor with the Charter's weights.</li>
+  <li>Charter changes need a 2/3 supermajority and a 30-day wait (timelock). <span class="tag on">On-chain</span></li>
+  <li>Annual: Form C-AR (Reg CF annual report), NC annual report, tax return. Investors get a <b>K-1</b> (partnership), or a 1099-DIV if a REIT structure is used. The app exports earnings history.</li>
+  <li>Quarterly: a public transparency page with income statement, reserve balance, governance history and impact metrics.</li>
+</ul>
+
+<h2>Phase 10. Exit (year 3–10)</h2>
+<table>
+<tr><th>Exit</th><th>How it works</th><th>Why it's good</th></tr>
+<tr><td><b>1. Tenant buys (preferred)</b></td><td>The tenant uses the lease-purchase option at the preset price, using the down-payment credit plus NC down-payment help. Investors are paid out.</td><td>The tenant becomes a homeowner, investors get liquidity, and the home stays local.</td></tr>
+<tr><td><b>2. Community holds</b></td><td>Keep renting long term. Investors keep monthly income. Members trade later through a registered platform.</td><td>Lasting affordable housing.</td></tr>
+<tr><td><b>3. Sale to a mission buyer</b></td><td>A land trust, CDC or another OwnTheBlock fund buys at appraisal with a deed restriction.</td><td>Stays affordable even after the sale.</td></tr>
+<tr><td><b>4. Open-market sale</b></td><td>Needs a 2/3 vote. The tenant and community get right of first refusal first.</td><td>Last resort; maximizes investor return.</td></tr>
+<tr><td><b>5. Family buy-back</b> (Structure B)</td><td>The heirs repurchase at the preset price within 5 years.</td><td>Keeps the family tie.</td></tr>
+</table>
+
+<!-- ===================================================== 4 -->
+<h1>4. How the blockchain fits, step by step</h1>
+<p>The honest answer to "why blockchain?": <b>the blockchain is the shared, public record and the rule-enforcer. The real world is proven with documents.</b> Here's exactly where each piece lives.</p>
+
+<table>
+<tr><th>Step</th><th>On or off chain</th><th>Contract / system</th><th>What the blockchain adds</th></tr>
+<tr><td>Identity check</td><td><span class="tag both">Both</span></td><td>Persona (off) → <b>IdentityRegistry</b> (on): wallet, tier, hashed zip code only</td><td>Rules (caps, tiers) can be enforced by code without exposing personal data.</td></tr>
+<tr><td>Commit money to a raise</td><td><span class="tag both">Both</span></td><td>Escrow bank holds dollars (off) → <b>Raise</b> records commitments (on)</td><td>Public, real-time proof of how much is raised and from which tiers. No fake "almost funded" claims.</td></tr>
+<tr><td>Raise succeeds / fails</td><td><span class="tag on">On</span></td><td><b>Raise.finalize()</b> mints tokens, or marks refunds</td><td>Everyone can see the outcome. Refund status can't be hidden.</td></tr>
+<tr><td>Ownership record</td><td><span class="tag both">Both</span></td><td><b>AssetToken</b> (ERC-3643-style permissioned token) mirrored by the transfer agent</td><td>Thousands of tiny owners tracked for almost nothing. Transfers only between verified people, with caps checked automatically.</td></tr>
+<tr><td>Buying the house</td><td><span class="tag off">Off</span></td><td>Attorney closing, deed recorded at the county</td><td>Deed and closing statement hashes posted, so documents can't be swapped later.</td></tr>
+<tr><td>Repair spending</td><td><span class="tag on">On</span></td><td><b>Treasury</b> multisig: steward must co-sign; large spends wait 7 days</td><td>No one can spend repair money alone. Every spend carries a memo and an invoice hash.</td></tr>
+<tr><td>Rent collected</td><td><span class="tag off">Off</span></td><td>PM collects in dollars</td><td>(Honest limit: code can't make a tenant pay.)</td></tr>
+<tr><td>Monthly payout</td><td><span class="tag on">On</span></td><td><b>Distributor</b>.deposit(amount, reportHash) → claim()</td><td>Payouts split exactly by tokens at the same cost whether there are 10 or 10,000 owners. The report hash ties each payout to its expense report.</td></tr>
+<tr><td>Votes and rules</td><td><span class="tag on">On</span></td><td><b>CommunityGovernor</b> + <b>RulesRegistry</b> (timelock)</td><td>Rent cap and reserve can't be changed quietly. Changes need a supermajority and a 30-day wait.</td></tr>
+<tr><td>Rent history for credit</td><td><span class="tag on">On</span></td><td><b>Ethereum Attestation Service</b> on Base (new idea)</td><td>A tenant's on-time rent becomes a portable record they own and can show any lender.</td></tr>
+<tr><td>Lessons and badges</td><td><span class="tag on">On</span></td><td><b>Badges</b> (non-transferable NFTs)</td><td>Proof of financial-literacy completion that follows the user.</td></tr>
+<tr><td>Gas fees</td><td><span class="tag on">On</span></td><td>Coinbase Paymaster</td><td>Users never need ETH. Cost to OwnTheBlock is fractions of a cent per transaction on Base (verify current costs).</td></tr>
+</table>
+
+<h2>Fixes to the spec's contract design</h2>
+<ul>
+  <li><b>Raise:</b> in production it doesn't hold investor dollars. It records commitments and mints at closing. On testnet it can hold MockUSDC to demonstrate the full flow, labeled "in production, a regulated escrow bank holds the funds."</li>
+  <li><b>Treasury:</b> change "2 of 3 (manager, OwnTheBlock, steward)" to "steward signature always required." Or use 3-of-5 including 2 elected resident reps.</li>
+  <li><b>Admin powers:</b> list every admin power in the app (pause, register KYC, deposit, migrate). Put them behind a multisig with a public log. Pause can never block refunds or claims (already in the spec).</li>
+  <li><b>Cancel commitment:</b> add <code>Raise.cancel()</code> that works until 48 hours before the deadline.</li>
+  <li><b>Recovery and inheritance:</b> the transfer agent can reissue tokens to a recovered or inherited wallet after identity checks. That's allowed because the tokens are permissioned, and it's a key safety feature.</li>
+</ul>
+
+<h2>Money flow diagram</h2>
+<div class="flow">  INVESTOR ──$──▶ ESCROW BANK ──(goal met)──▶ LLC BANK ──▶ CLOSING ATTORNEY ──▶ SELLER
+     │              │ (goal missed: refund)        │                    (deed recorded to LLC)
+     │              ▼                              ▼
+     │        Raise contract  ◀─ records ─    Treasury (USDC, multisig) ──▶ CONTRACTORS (staged)
+     │        mints TOKENS ─────────────────▶ investor wallet
+     │
+  TENANT ──rent $──▶ PROPERTY MANAGER ──▶ taxes, insurance, repairs, reserve, fees
+                                     └──▶ net cash → USDC → DISTRIBUTOR ──claim──▶ INVESTORS
+                                                         (report hash on-chain)</div>
+
+<!-- ===================================================== 5 -->
+<h1>5. The people: every role and how residents get involved</h1>
+<table>
+<tr><th>Who</th><th>Role</th><th>What they get</th><th>What they risk / owe</th></tr>
+<tr><td><b>Resident investor</b> (Mr. Davis, Jasmine)</td><td>Buys tokens, votes, proposes projects</td><td>Monthly income, appreciation, a vote with a 1.5× resident bonus</td><td>Can lose money; locked 12 months</td></tr>
+<tr><td><b>Alumni / outside investor</b> (Dr. Owens)</td><td>Buys after local windows, within caps</td><td>Same returns and impact; standard vote</td><td>Same</td></tr>
+<tr><td><b>Tenant</b> (Tasha)</td><td>Rents the home</td><td>Capped rent increases, lease-purchase option, down-payment credit, credit reporting</td><td>Pays rent; normal tenant duties</td></tr>
+<tr><td><b>Seller / heirs</b></td><td>Sells or contributes the house</td><td>Cash at appraisal, a buy-back right, or equity (Structures A/B/C)</td><td>Must clear title</td></tr>
+<tr><td><b>Business owner</b> (Marcus)</td><td>Raises revenue-share capital</td><td>Capital without giving up ownership or pledging their house</td><td>Shares 4–5% of revenue until the cap</td></tr>
+<tr><td><b>Steward</b> (neighborhood association, church, CDC, land trust)</td><td>Governance seat, co-signs spending, golden share on affordability</td><td>Mission control without owning or managing</td><td>Time; reputation</td></tr>
+<tr><td><b>OwnTheBlock Inc.</b></td><td>Sponsor, LLC manager, app, deal vetting</td><td>Raise fee, rent fee, possibly asset fee and software licensing</td><td>Fiduciary duty to members; legal liability</td></tr>
+<tr><td><b>Funding portal / broker-dealer</b></td><td>Hosts the Reg CF offering, compliance, escrow</td><td>Portal fee</td><td>Regulated by SEC/FINRA</td></tr>
+<tr><td><b>Escrow bank</b></td><td>Holds investor money until the raise closes</td><td>Fee</td><td>—</td></tr>
+<tr><td><b>Transfer agent</b></td><td>Official owner list (mirrors the chain)</td><td>Fee</td><td>SEC-registered</td></tr>
+<tr><td><b>Closing attorney / title company</b></td><td>Title search, closing, deed recording</td><td>Fees</td><td>—</td></tr>
+<tr><td><b>Appraiser, inspector, contractors</b></td><td>Value, condition, repairs</td><td>Fees (local hires first)</td><td>Licensed</td></tr>
+<tr><td><b>Property manager</b></td><td>Leasing, rent, repairs, monthly report</td><td>8% of rent</td><td>Licensed NC broker</td></tr>
+<tr><td><b>CPA</b></td><td>Financial review, tax returns, K-1s</td><td>Fees</td><td>—</td></tr>
+<tr><td><b>First-loss partner</b> (bank CRA, foundation, city)</td><td>Absorbs first 10% of losses</td><td>CRA credit or mission return</td><td>Their capital</td></tr>
+</table>
+
+<h2>How residents get involved (the community plan)</h2>
+<ol>
+  <li><b>Block captains:</b> one paid or stipended resident per block hosts meetings and helps neighbors sign up in person.</li>
+  <li><b>Sign-up nights</b> at churches, barbershops and the A&amp;T student union. Bring tablets so people can sign up on the spot. Do KYC in person for people uncomfortable doing it alone.</li>
+  <li><b>Learn first:</b> the simulator and the "Money basics" track come before any investment. Partner with A&amp;T's business school for student financial coaches.</li>
+  <li><b>Pitch nights:</b> residents present ideas from the Pitch Board, and the top ideas go to due diligence.</li>
+  <li><b>Auto-invest $10/month:</b> make small, steady investing the default habit.</li>
+  <li><b>Spanish and accessibility</b> so every neighbor can participate.</li>
+</ol>
+
+<!-- ===================================================== 6 -->
+<h1>6. How a property gets bought: six scenarios</h1>
+<p>In every case, <b>the buyer is the LLC</b>. People can't own part of a house directly, but they can own part of the LLC that owns it. Tokens are units of that LLC.</p>
+
+<h2>Scenario A: Paid-off house, owner wants to sell</h2>
+<div class="step"><div class="n">1</div><div>Ms. Jenkins' neighbor (living) owns a house outright and wants to sell to the community instead of an investor.</div></div>
+<div class="step"><div class="n">2</div><div>Appraisal says $110k as-is. The purchase agreement is signed at $110k, contingent on the raise, with a 120-day close.</div></div>
+<div class="step"><div class="n">3</div><div>The raise covers price + closing + repairs + reserve + offering costs. At closing, the attorney pays any taxes owed, the seller gets the rest, and the deed goes to the LLC.</div></div>
+<p><b>Timeline:</b> 4–6 months. <b>Simplest case. Lead with this one.</b></p>
+
+<h2>Scenario B: House with a mortgage</h2>
+<p>Same as A, except the attorney gets a <b>payoff letter</b> from the lender and pays the loan off at closing. The seller keeps the rest (their equity). If the seller owes more than the house is worth (a short sale), the lender must approve, which adds 2–4 months.</p>
+
+<h2>Scenario C: Bank-owned (foreclosure / REO)</h2>
+<p>The LLC makes an offer to the bank like any buyer. The problem: banks want fast cash closings, and a 90-day raise is slow. <b>Fix:</b> a <b>bridge fund</b> (first-loss partner or CDFI line of credit) buys quickly, then the raise refinances it within 6 months. Also ask about "first look" programs that give community buyers priority on foreclosed homes (verify local availability).</p>
+
+<h2>Scenario D: Heirs' property / eyesore (the Rescue the Eyesore case)</h2>
+<table>
+<tr><th>Structure</th><th>Family gets</th><th>Community gets</th><th>Example numbers</th></tr>
+<tr><td><b>A. Sell</b></td><td>Cash at appraised as-is value (minus back taxes and liens)</td><td>The whole house</td><td>Buy $50k, repairs $35k + 15%, ARV $120k</td></tr>
+<tr><td><b>B. Sell with buy-back</b></td><td>Cash now + right to buy back within 5 years at a preset price</td><td>Rental income or a sale</td><td>Preset price = cost + 4%/yr</td></tr>
+<tr><td><b>C. Contribute for equity</b></td><td>About half the tokens, no cash needed</td><td>The rest of the tokens for funding repairs</td><td>Family 5,000 tokens; neighbors 4,500</td></tr>
+</table>
+<p><b>Hurdles:</b> every heir must sign (often the slowest step, sometimes over a year), back taxes come out of the price, vacant-property insurance is expensive, and repairs can overrun.</p>
+<p><b>Fixes to present:</b> partner with a legal aid clinic for heirs' property, and don't open the raise until title is clear. Under Structure C, the family's large stake gets a <b>Charter-approved exception</b> to the per-person cap, and its votes are capped at 25% on community decisions.</p>
+<p><b>The fairness question:</b> "If the community buys at $50k and sells at $120k, did you take the family's equity?" <b>Answer:</b> the $70k gap is mostly the $35–40k of repairs plus risk. The family gets the full as-is value and can choose B or C to share in the upside. Show all three side by side.</p>
+
+<h2>Scenario E: Land bank, city or tax-foreclosed property</h2>
+<p>Cities and counties often sell vacant or tax-foreclosed lots and houses at a discount to buyers who promise to fix and occupy them. The steward (city or CDC) brings the property in, gets a governance seat, and puts affordability in the deed. <b>This is the best pipeline for scale.</b> Ask the City of Greensboro what vacant-property programs it has.</p>
+
+<h2>Scenario F: House with a tenant already living there</h2>
+<p>The LLC buys with the tenant in place, so the lease carries over. The tenant gets the lease-purchase option on day one and isn't displaced. That's a strong anti-gentrification message.</p>
+
+<h2>What about borrowing (leverage)?</h2>
+<p>The spec says no leverage for users, which is right. At the <b>property</b> level, a loan covering 50–60% of the price (for example from a CDFI) would cut the raise in half and raise investor yield. It also adds the risk of losing the house in a bad year. <b>Recommendation:</b> no property debt in the pilot. Consider a modest CDFI loan once there's an operating track record.</p>
+
+<!-- ===================================================== 7 -->
+<h1>7. Worked example: Jasmine buys a piece of a house</h1>
+<p>This uses the <b>recommended model</b> from Section 8: a distressed house bought below value, in a pooled fund that keeps paperwork costs low. Jasmine is the spec's 20-year-old A&amp;T sophomore with $40 a month to spare.</p>
+
+<table>
+<tr><th>Date</th><th>What happens</th><th>Jasmine's money</th><th>Chain</th></tr>
+<tr><td>Dec 2026</td><td>Downloads the app, runs the simulator story mode, completes "Money basics" and "Safety." Signs up with phone number + Face ID. A wallet is created silently.</td><td>$0</td><td>—</td></tr>
+<tr><td>Dec 2026</td><td>KYC: license photo + selfie. Enters zip 27411 and her ncat.edu email → Tier 2 (student).</td><td>$0</td><td><span class="tag on">On</span> IdentityRegistry.register (no personal data)</td></tr>
+<tr><td>Jan 8, 2027</td><td>310 Demo Ct raise opens: $144,000 goal, 14,400 tokens at $10. Residents get days 1–7; Jasmine's window opens day 8.</td><td>—</td><td>—</td></tr>
+<tr><td>Jan 15</td><td>Commits <b>$100 = 10 tokens</b> by debit card. The 24-hour cooling-off doesn't apply (it's exactly $100, not above). The app shows fees, her ownership share (0.069%) and risks.</td><td>$100 in the escrow bank</td><td><span class="tag on">On</span> Raise records commitment</td></tr>
+<tr><td>Mar 31</td><td>Goal reached. Escrow releases to the LLC. 10 tokens are minted to her wallet.</td><td>10 tokens</td><td><span class="tag on">On</span> finalize + mint</td></tr>
+<tr><td>Apr 30</td><td>Closing: the LLC buys the house for $90,000. The deed is recorded.</td><td>—</td><td><span class="tag both">Both</span> deed hash</td></tr>
+<tr><td>May–Jul</td><td>Repairs in 3 draws, each with an invoice and photos.</td><td>—</td><td><span class="tag on">On</span> Treasury.spend ×3</td></tr>
+<tr><td>Aug 1</td><td>A family moves in at $1,400/month with the lease-purchase option.</td><td>—</td><td>—</td></tr>
+<tr><td>Sep 15</td><td><b>First payout.</b> $700 net to investors ÷ 14,400 tokens = $0.0486 per token.</td><td><b>+$0.49</b></td><td><span class="tag on">On</span> deposit + claim</td></tr>
+<tr><td>Each month</td><td>Same, with ups and downs (vacancy, repairs). Auto-reinvest is on.</td><td>~$0.49/mo, ~$5.83/yr</td><td><span class="tag on">On</span></td></tr>
+<tr><td>Mar 2028</td><td>12-month lockup ends. She can transfer to other verified members (through a registered platform once it's available).</td><td>—</td><td>—</td></tr>
+<tr><td>2032 (year 5)</td><td>The tenant exercises the purchase option, or the community votes to sell. At 3% yearly growth, a token is worth ~$11.56 after selling costs.</td><td>Sale: <b>$115.60</b> + payouts ~$29 = <b>~$144.80</b></td><td><span class="tag on">On</span> final distribution, tokens burned</td></tr>
+</table>
+
+<div class="box key"><b>Jasmine's result on $100:</b> about $144.80 back over 5 years, an <b>~8.7% yearly return</b> (estimate, not a guarantee). If she also auto-invests her $40 a month at that return, she'd have about <b>$3,100</b> after 5 years from $2,500 put in, plus 6 lesson badges and a credit-building habit.<br><span class="small muted">Downside: if the house is worth 10% less than expected, prices stay flat for 5 years and there are two vacant months, she'd get back about $117 (about 3% a year). If the value falls 25%, she roughly breaks even, and bigger shocks (an uninsured disaster, a long vacancy) mean a loss. Show these next to the base case.</span></div>
+
+<h2>The other personas, same house</h2>
+<table>
+<tr><th>Person</th><th>Puts in</th><th>Tokens</th><th>Monthly payout</th><th>Year 5 total back (est.)</th><th>Notes</th></tr>
+<tr><td>Jasmine (student)</td><td class="num">$100</td><td class="num">10</td><td class="num">$0.49</td><td class="num">~$145</td><td>Tier 2</td></tr>
+<tr><td>Mr. Davis (resident)</td><td class="num">$500</td><td class="num">50</td><td class="num">$2.43</td><td class="num">~$724</td><td>Tier 1; vote counts 1.5×</td></tr>
+<tr><td>Dr. Owens (alumna, Atlanta)</td><td class="num">$2,500</td><td class="num">250</td><td class="num">$12.15</td><td class="num">~$3,620</td><td>Reg CF yearly limit applies (higher with higher income)</td></tr>
+<tr><td>Tasha (tenant)</td><td class="num">$0</td><td class="num">—</td><td class="num">—</td><td>$100/mo down-payment credit → $6,000 at year 5 + help with the down payment</td><td>Lease-purchase option at a preset price</td></tr>
+</table>
+
+<!-- ===================================================== 8 -->
+<h1>8. The money: how profit is made and how long ROI takes</h1>
+
+<h2>Where investors' returns come from</h2>
+<ol>
+  <li><b>Monthly rent income:</b> what's left after vacancy, management, reserve, taxes, insurance, admin and fees.</li>
+  <li><b>Appreciation:</b> the house is worth more when sold, through the market rising or, mainly, the repairs adding value.</li>
+  <li><b>Business repayments:</b> a share of revenue until the cap (Section 9).</li>
+</ol>
+<p>Return of your original $10 mostly comes <b>at the exit</b>. Rent alone takes 15–28 years to pay back $10, so the exit plan is essential.</p>
+
+<h2>Sources and uses: three versions of one house</h2>
+<table>
+<tr><th>Line</th><th class="num">Spec (as written)</th><th class="num">Spec house, all real costs</th><th class="num">Recommended: distressed house</th></tr>
+<tr><td>Purchase price</td><td class="num">$132,000</td><td class="num">$132,000</td><td class="num">$90,000</td></tr>
+<tr><td>Closing costs (attorney, title, recording)</td><td class="num">—</td><td class="num">$2,600</td><td class="num">$2,000</td></tr>
+<tr><td>Renovation</td><td class="num">$15,000</td><td class="num">$15,000</td><td class="num">$35,000</td></tr>
+<tr><td>Renovation contingency (15%)</td><td class="num">—</td><td class="num">$2,250</td><td class="num">$5,250</td></tr>
+<tr><td>Starting reserve</td><td class="num">$3,000</td><td class="num">$3,110</td><td class="num">$3,110</td></tr>
+<tr><td>Legal + CPA review + escrow agent</td><td class="num">—</td><td class="num">$6,500</td><td rowspan="2" class="num">$5,760<br><span class="small muted">(4%, pooled templates)</span></td></tr>
+<tr><td>Portal fee (~5%)</td><td class="num">—</td><td class="num">$8,775</td></tr>
+<tr><td>OwnTheBlock raise fee</td><td class="num">— (3% "paid by project")</td><td class="num">$5,265 (3%)</td><td class="num">$2,880 (2%)</td></tr>
+<tr class="total"><td>Total raise</td><td class="num">$150,000</td><td class="num">$175,500</td><td class="num">$144,000</td></tr>
+<tr><td>Tokens at $10</td><td class="num">15,000</td><td class="num">17,550</td><td class="num">14,400</td></tr>
+<tr><td>House value after repairs</td><td class="num">$147,000</td><td class="num">$147,000</td><td class="num">$150,000 (ARV)</td></tr>
+<tr><td><b>Value per $10 token on day one</b></td><td class="num">$10.00</td><td class="num" style="color:var(--brick)"><b>$8.55</b></td><td class="num" style="color:var(--green)"><b>$10.63</b></td></tr>
+</table>
+
+<h2>Monthly income statement (rent $1,400)</h2>
+<table>
+<tr><th>Line</th><th class="num">Spec</th><th class="num">Real costs, one LLC per house</th><th class="num">Real costs, pooled fund</th></tr>
+<tr><td>Rent</td><td class="num">$1,400</td><td class="num">$1,400</td><td class="num">$1,400</td></tr>
+<tr><td>Vacancy allowance 5% (saved to reserve)</td><td class="num">−$70</td><td class="num">−$70</td><td class="num">−$70</td></tr>
+<tr><td>Property management 8%</td><td class="num">−$112</td><td class="num">−$112</td><td class="num">−$112</td></tr>
+<tr><td>Maintenance reserve 10%</td><td class="num">−$140</td><td class="num">−$140</td><td class="num">−$140</td></tr>
+<tr><td>Platform fee 2%</td><td class="num">−$28</td><td class="num">−$28</td><td class="num">−$28</td></tr>
+<tr><td>Property tax + landlord insurance <span class="muted">(verify Guilford rates)</span></td><td class="num">−$200</td><td class="num">−$270</td><td class="num">−$270</td></tr>
+<tr><td>LLC admin: bookkeeping, tax returns, K-1s, Form C-AR, transfer agent</td><td class="num">—</td><td class="num">−$250</td><td class="num">−$80</td></tr>
+<tr class="total"><td>Paid to investors each month</td><td class="num">$850</td><td class="num">$530</td><td class="num">$700</td></tr>
+</table>
+
+<h2>Return on investment: how long it takes</h2>
+<table>
+<tr><th>Model</th><th class="num">Cash yield</th><th class="num">Cash per $10 / yr</th><th class="num">Rent-only payback</th><th class="num">Even by (with sale)</th><th class="num">Return 5 yr</th><th class="num">Return 7 yr</th><th class="num">Return 10 yr</th></tr>
+<tr><td>Spec as written</td><td class="num">6.8%</td><td class="num">$0.68</td><td class="num">14.7 yrs</td><td class="num">Year 1</td><td class="num">8.5%</td><td class="num">8.7%</td><td class="num">8.8%</td></tr>
+<tr><td>Spec house, real costs</td><td class="num">3.6%</td><td class="num">$0.36</td><td class="num">27.6 yrs</td><td class="num">Year 4</td><td class="num">2.3%</td><td class="num">3.5%</td><td class="num">4.3%</td></tr>
+<tr><td>Spec house, pooled fund</td><td class="num">4.8%</td><td class="num">$0.48</td><td class="num">20.9 yrs</td><td class="num">Year 3</td><td class="num">3.6%</td><td class="num">4.7%</td><td class="num">5.5%</td></tr>
+<tr style="font-weight:700"><td>Recommended: distressed + pooled</td><td class="num">5.8%</td><td class="num">$0.58</td><td class="num">17 yrs</td><td class="num">Day one</td><td class="num">8.7%</td><td class="num">8.5%</td><td class="num">8.3%</td></tr>
+</table>
+<p class="small muted">All cases assume 3% yearly home-price growth and 6% selling costs. At 2% growth the recommended case drops by about 1 point. The yearly return is an IRR (internal rate of return): one number that counts both the monthly payouts and the sale.</p>
+
+<div class="box gold"><b>How to say it to judges:</b> "We don't promise getting rich from one token. A typical OwnTheBlock home is projected to return about 8% a year, roughly 6% in cash and the rest from fixing up a distressed house. Rent alone wouldn't pay you back for 17 years, which is why every project has a planned exit: the tenant buys the home, or the community sells it to a land trust. Buying homes at full retail price would only earn about 3.5% a year after real costs, so we don't."</div>
+
+<h2>Compared with alternatives (per $100 over 5 years, estimates)</h2>
+<table>
+<tr><th>Option</th><th class="num">Value after 5 years</th><th>Risk</th><th>Can you get it back any time?</th></tr>
+<tr><td>Cash under the mattress (3% inflation)</td><td class="num">~$86 in today's dollars</td><td>Inflation</td><td>Yes</td></tr>
+<tr><td>High-yield savings (4%)</td><td class="num">~$122</td><td>Very low (FDIC)</td><td>Yes</td></tr>
+<tr><td>Stock index fund (long-run ~7–10%, varies a lot)</td><td class="num">~$140–160</td><td>Market swings</td><td>Yes</td></tr>
+<tr><td>OwnTheBlock, recommended model</td><td class="num">~$145</td><td>Single-property, business and legal risk</td><td>No (12-month lockup; limited resale)</td></tr>
+</table>
+<p><b>Be honest:</b> on pure return, OwnTheBlock is similar to an index fund with less liquidity. Its real advantages are <b>local ownership, a voice, tenant ownership paths and impact</b>. Say this before a judge does.</p>
+
+<!-- ===================================================== 9 -->
+<h1>9. Business deals: fixing the barbershop terms</h1>
+<p>Spec: Marcus raises $25,000, pays 5% of monthly revenue ($200k a year) until investors get 1.4× ($35,000).</p>
+
+<table>
+<tr><th>Terms</th><th class="num">Monthly payment</th><th class="num">Months to repay</th><th class="num">Cost to Marcus (APR)</th><th class="num">Investor return (after 2% fee)</th></tr>
+<tr><td>Spec: 5%, 1.4× cap</td><td class="num">$833</td><td class="num">42</td><td class="num" style="color:var(--brick)"><b>~20%</b></td><td class="num">~20%</td></tr>
+<tr><td>5%, 1.3× cap</td><td class="num">$833</td><td class="num">39</td><td class="num">~17%</td><td class="num">~16%</td></tr>
+<tr><td><b>4%, 1.25× cap (recommended)</b></td><td class="num">$667</td><td class="num">47</td><td class="num" style="color:var(--green)"><b>~12%</b></td><td class="num">~11%</td></tr>
+<tr><td>Same, slow year (revenue −25%)</td><td class="num">$500</td><td class="num">63</td><td class="num">~9%</td><td class="num">~8%</td></tr>
+</table>
+<p class="small muted">Investor returns are before business failures. If about 1 in 10 deals fails partway, expected returns drop by a few points. The first-loss partner absorbs part of that.</p>
+
+<h2>Right comparison: merchant cash advances, not SBA loans</h2>
+<p>Businesses turned down by banks often take <b>merchant cash advances</b>, which commonly cost far more than 40% APR (verify with a source for your pitch). Against those, 12% with no collateral and payments that shrink in slow months is a strong offer. Against an SBA microloan (often around 8–13%), it's comparable but needs no personal guarantee or collateral. Make that the pitch.</p>
+
+<h2>Revenue verification (the cash-business problem)</h2>
+<ul>
+  <li>Require a <b>connected card terminal</b> (Square, Stripe or Clover) as a condition of funding. Revenue flows in automatically.</li>
+  <li>For cash sales, require monthly bank deposit statements. Investors get a defined percentage of <b>bank deposits</b>, not self-reported numbers.</li>
+  <li>Allow a payment pause of up to 2 months a year (counted against the cap), with a vote.</li>
+  <li>Pair each deal with free bookkeeping help from A&amp;T accounting students, which also counts as impact.</li>
+</ul>
+
+<!-- ===================================================== 10 -->
+<h1>10. How OwnTheBlock itself makes money</h1>
+<table>
+<tr><th>Revenue line</th><th class="num">Per home (recommended model)</th><th>Comment</th></tr>
+<tr><td>Raise fee 2%</td><td class="num">$2,880 once</td><td>Paid from the raise (investors see it in sources and uses)</td></tr>
+<tr><td>Rent fee 2%</td><td class="num">$336 / yr</td><td>Thin. The spec's growth model needed ~1,600 homes to cover a $45k/month team.</td></tr>
+<tr><td>Optional 1% yearly asset fee</td><td class="num">$1,440 / yr</td><td>Industry-standard, but it cuts investor yield by about 1 point</td></tr>
+<tr><td>In-house property management</td><td class="num">~$400 / yr margin</td><td>Conflict of interest; needs independent oversight</td></tr>
+<tr><td><b>Software licensing (new)</b></td><td>$300–1,000 / month per partner</td><td>License the platform to land trusts, CDCs and cities. Doesn't touch resident returns.</td></tr>
+<tr><td><b>Grants and program money (new)</b></td><td>Varies</td><td>Financial literacy, housing and HBCU-partnership grants fund the early years</td></tr>
+</table>
+<div class="box warn"><b>Honest answer for judges:</b> "Transaction fees alone don't support a company until we're managing a few hundred homes. Our pilot runs lean (about $10k a month), funded by grants and impact investors. Long term, revenue comes from licensing the platform to land trusts, CDCs and cities that already hold properties. That scales without charging residents more."</div>
+
+<!-- ===================================================== 11 -->
+<h1>11. Judge question bank with answers</h1>
+<p><span class="tag ready">READY</span> = you can answer now · <span class="tag fix">FIX FIRST</span> = the answer depends on a fix from Section 2.</p>
+
+<h2>Blockchain</h2>
+<div class="q"><b class="qq">1. Where's the blockchain? Is anything actually on-chain? <span class="tag fix">FIX FIRST</span></b>Build the testnet contracts. Then: "Every buy, payout and vote you just saw is a real transaction on Base Sepolia. Here's the explorer link." Until then, say plainly that it's a simulator with formatted sample records and the contracts come next.</div>
+<div class="q"><b class="qq">2. Why blockchain instead of a database? Portland's Community Investment Trust does this without one. <span class="tag ready">READY</span></b>"A database works for one operator in one city. We want any neighborhood to run its own rules that even we can't change quietly: a rent cap with a 30-day timelock, caps checked on every transfer, payouts to 10,000 owners at the same cost as 10, and a public record anyone can audit. The CIT proves the demand. We make it cheap enough to copy in 100 communities."</div>
+<div class="q"><b class="qq">3. You hold admin keys, register KYC and deposit the rent. Isn't this centralized? <span class="tag fix">FIX FIRST</span></b>"Some parts must be: the law requires a responsible manager. We limit our power and make it visible. The steward co-signs every spend, the rules can't change without a vote and a timelock, we can't block refunds or claims, and every admin action is logged on-chain."</div>
+<div class="q"><b class="qq">4. Base is run by Coinbase. Isn't that centralized too? <span class="tag ready">READY</span></b>"Base settles to Ethereum, so the records are anchored on a public chain. We chose it for cheap fees, passkey wallets and Coinbase's onramp. The contracts could move to another network if needed."</div>
+<div class="q"><b class="qq">5. What if USDC loses its peg or a contract is hacked? <span class="tag ready">READY</span></b>"Investor money is in dollars at an escrow bank until closing, and the house is the real asset. USDC is only used for payouts, held for hours, not years. Contracts get a professional audit before real money, and pausing can never block refunds. USDC is now regulated under the GENIUS Act."</div>
+
+<h2>Legal</h2>
+<div class="q"><b class="qq">6. Is this legal? <span class="tag ready">READY</span></b>"Yes, under existing rules: Regulation Crowdfunding through a registered portal, one LLC per property (or a pooled fund), KYC on every investor, the 12-month lockup enforced in code, and a securities attorney reviewing every offering."</div>
+<div class="q"><b class="qq">7. Reg CF requires a bank escrow. Your smart contract can't hold funds. <span class="tag fix">FIX FIRST</span></b>"Right. In production, dollars go to the portal's escrow bank. The contract records commitments and mints tokens when the raise closes. The testnet version holds test dollars only to demonstrate the flow."</div>
+<div class="q"><b class="qq">8. Can the Neighborhood Fund use Reg CF? <span class="tag fix">FIX FIRST</span></b>"Our fund owns homes directly, not other companies' securities, so it's a real estate company, not an investment company. Our attorney confirms the structure."</div>
+<div class="q"><b class="qq">9. Is your marketplace an unregistered exchange? <span class="tag fix">FIX FIRST</span></b>"There's no peer-to-peer trading in the pilot. After the lockup, resale goes through a registered trading platform. Until then, the fund offers limited buyback windows."</div>
+<div class="q"><b class="qq">10. Do zip-code tiers and an HBCU tier break fair-housing or civil-rights law? <span class="tag ready">READY</span></b>"Preferences are based on where you live and your local ties, never on race, and every Charter preset is reviewed by an attorney. Tier 2 is open to any student or alumnus regardless of school. The priority window is only 7 days, after which any verified U.S. investor can join. Tenant selection is done by the licensed manager under fair-housing law, not by investors."</div>
+<div class="q"><b class="qq">11. Is a revenue-share note a loan under NC usury law? <span class="tag fix">FIX FIRST</span></b>"Our attorney structures it as a revenue-share security, with payments that rise and fall with revenue and no fixed repayment schedule. The 1.25× cap keeps the effective cost around 12%."</div>
+<div class="q"><b class="qq">12. Who sends the tax forms? A K-1 for $0.68? <span class="tag fix">FIX FIRST</span></b>"The pooled fund means one tax form per investor per year, not one per house. We're evaluating a REIT structure with our CPA so investors get a simple 1099-DIV."</div>
+
+<h2>Money</h2>
+<div class="q"><b class="qq">13. $0.68 a year is nothing. Why bother? <span class="tag ready">READY</span></b>"It's the starting point, not the pitch. Wealth stacks: $10 a month with auto-reinvest, a sale or tenant purchase at the end, lessons that change how you handle money, a credit-reporting rent history, and a voice on your block."</div>
+<div class="q"><b class="qq">14. Your raise leaves out closing costs, legal and portal fees. <span class="tag fix">FIX FIRST</span></b>Show the Section 8 table. "Full price would be ~3.5%. That's why we buy distressed homes below value: ~8.7%."</div>
+<div class="q"><b class="qq">15. How long until I get my money back? <span class="tag ready">READY</span></b>"In our model the house is worth more than the raise on day one because we buy below value. Cash comes monthly, and most of your money comes back at the exit, typically years 3–7, when the tenant buys or the community sells."</div>
+<div class="q"><b class="qq">16. How does OwnTheBlock make money? Your own model needs 10 years to break even. <span class="tag ready">READY</span></b>Use the Section 10 answer: a lean pilot, grants, then software licensing to land trusts, CDCs and cities.</div>
+<div class="q"><b class="qq">17. The barbershop deal is a 20% loan. <span class="tag fix">FIX FIRST</span></b>"We changed it to 4% of revenue with a 1.25× cap: about 12%, no collateral, and payments shrink in slow months. The alternative for most local shops is a merchant cash advance costing much more."</div>
+<div class="q"><b class="qq">18. Barbershops are cash businesses. How do you verify revenue? <span class="tag ready">READY</span></b>"Funding requires a connected card terminal plus monthly bank deposit statements. Payments are a share of verified deposits."</div>
+<div class="q"><b class="qq">19. What happens if a business fails? <span class="tag ready">READY</span></b>"Investors can lose the unpaid part. The first-loss partner covers the first 10%, the fund spreads it across many deals, and the simulator shows this openly."</div>
+<div class="q"><b class="qq">20. Who's your first-loss partner? <span class="tag fix">FIX FIRST</span></b>Name a target type, and ideally one organization you've contacted. "Banks get Community Reinvestment Act credit for exactly this."</div>
+<div class="q"><b class="qq">21. Why would anyone choose this over an index fund? <span class="tag ready">READY</span></b>"Returns are similar, but this one is on your block, you get a vote, your neighbor becomes a homeowner, and the dollars stay local. It complements an index fund rather than replacing it, and our lessons say so."</div>
+
+<h2>Community and housing</h2>
+<div class="q"><b class="qq">22. Affordable to whom? $1,400 isn't affordable on this block. <span class="tag fix">FIX FIRST</span></b>"We measure against the neighborhood's own median income, not the metro area's. Each home's rent target is set in the Charter, and the rent cap holds increases to 3% a year. The lease-purchase option turns part of rent into a down payment."</div>
+<div class="q"><b class="qq">23. Investors want rents up and a sale to the highest bidder. Whose side are you on? <span class="tag fix">FIX FIRST</span></b>"The Charter settles it. Rent caps apply even between tenants, and the default exit is a sale to the tenant, a land trust or the community with a deed restriction. Investors get a fair return from fixing the eyesore, not from squeezing the tenant."</div>
+<div class="q"><b class="qq">24. Will a neighbor-owned LLC evict a single mom? <span class="tag ready">READY</span></b>"Only as a last resort. Our published policy is hardship fund, then payment plan, then mediation, with the steward involved. Investors never make tenant decisions. A licensed manager follows the law and the policy."</div>
+<div class="q"><b class="qq">25. Rent-to-own: how long until Tasha owns? <span class="tag fix">FIX FIRST</span></b>"Tasha gets an option to buy the home at a price set the day she moves in. $100 of each month's rent goes into a down-payment credit, about $6,000 by year 5, plus NC down-payment assistance. Her on-time rent builds credit through reporting."</div>
+<div class="q"><b class="qq">26. Isn't Rescue the Eyesore just flipping? <span class="tag ready">READY</span></b>"A flipper sells to the highest bidder and leaves. We pay the family full appraised value, give them buy-back or equity options, rent to a local family with capped rent, and the default exit keeps the home affordable. The value comes from the repair, not from pushing anyone out."</div>
+<div class="q"><b class="qq">27. How do you stop outsiders taking over? <span class="tag ready">READY</span></b>"Each neighborhood's Charter sets who can invest, per-person caps, a local-share floor and resident vote weight, and the token contract rejects any transfer that breaks them. Changing the Charter takes a supermajority and a 30-day wait." Show the Resident Owned preset (2% cap, 51% local floor).</div>
+<div class="q"><b class="qq">28. Your own simulator assumes only 40% local investors. <span class="tag fix">FIX FIRST</span></b>"That's our conservative estimate for open raises. A neighborhood that wants majority-local ownership turns on the 51% floor, and the raise simply takes longer."</div>
+<div class="q"><b class="qq">29. Who are the "members" who vote? Can a renter with no tokens vote on my property? <span class="tag fix">FIX FIRST</span></b>"Binding votes on a property are by its token holders, with residents weighted 1.5×. Non-holder residents get an advisory vote on Pitch Board projects and community rules."</div>
+<div class="q"><b class="qq">30. Have you talked to real residents, owners or the city? <span class="tag fix">FIX FIRST</span></b>Bring a number: "We surveyed __ residents; __% would invest $10 a month." Bring one letter of interest.</div>
+
+<h2>Operations and users</h2>
+<div class="q"><b class="qq">31. Lost phone? Death of an investor? <span class="tag ready">READY</span></b>"Passkeys back up to iCloud or Google. If those are lost too, we recover through an identity check and the transfer agent reissues tokens. Investors name a beneficiary, and heirs claim through the same process."</div>
+<div class="q"><b class="qq">32. What about unbanked residents or people without ID? <span class="tag ready">READY</span></b>"Federal law requires identity checks for securities. We help in person at sign-up nights, partner with a credit union for a free account, and offer cash deposit at partner locations. Our lessons and simulator are free for everyone."</div>
+<div class="q"><b class="qq">33. Who manages the property? Isn't it a conflict if it's you? <span class="tag ready">READY</span></b>"A licensed independent manager in the pilot. If we manage in-house later, the steward reviews the books and members can vote to replace us."</div>
+<div class="q"><b class="qq">34. Who finds and prices properties? <span class="tag ready">READY</span></b>"Neighbors flag them, stewards bring them, and we vet them. A licensed appraiser sets the price, and we never pay above as-is value."</div>
+<div class="q"><b class="qq">35. Heirs disagree or can't be found? <span class="tag ready">READY</span></b>"No raise until title is clear. We partner with legal aid on heirs' property. It's the slowest step, and we say so."</div>
+<div class="q"><b class="qq">36. What if repairs run over? <span class="tag ready">READY</span></b>"15% contingency, staged payments with inspections, and a community vote if it goes beyond that. The simulator shows the overrun case."</div>
+<div class="q"><b class="qq">37. Can I sell my tokens? <span class="tag ready">READY</span></b>"Not for 12 months (federal rule). After that, through a registered trading platform when available, plus fund buyback windows. Treat it as a long-term investment."</div>
+
+<h2>Competition and scale</h2>
+<div class="q"><b class="qq">38. How are you different from RealT, Lofty, Arrived or Fundrise? <span class="tag ready">READY</span></b>"They let anyone anywhere buy rental homes they'll never see. We let a neighborhood own itself: local-first access, resident votes, rent caps in code, tenant ownership paths and financial education. RealT shows what happens without local stewards: the City of Detroit sued it over neglected homes. Our steward and staged repairs exist to prevent exactly that."</div>
+<div class="q"><b class="qq">39. Mainvest did revenue-share crowdfunding and shut down. Why will you survive? <span class="tag ready">READY</span></b>"Revenue share is one product line, backed by the home portfolio, and we focus on one community at a time with stewards and first-loss partners. We also earn from software licensing, not only deal fees."</div>
+<div class="q"><b class="qq">40. Why not partner with a land trust or CDFI? <span class="tag ready">READY</span></b>"We do. They're our stewards and our software customers. We give them a way to raise $10 from neighbors, which they don't have today."</div>
+<div class="q"><b class="qq">41. How do you scale to 100 HBCU communities? <span class="tag ready">READY</span></b>"Deal supply limits growth, not money. So we grow through stewards (cities, land banks, HBCU foundations) who already have properties, using the same contract template and Charter presets."</div>
+<div class="q"><b class="qq">42. "That's for the community to decide" sounds like dodging. <span class="tag ready">READY</span></b>Use it once at most. For tenants, exits and affordability, give the default rule from this document, then add "and a community can choose stricter rules."</div>
+
+<!-- ===================================================== 12 -->
+<h1>12. Comments on the spec, section by section</h1>
+<table>
+<tr><th>Section</th><th>Comment</th></tr>
+<tr><td>Cover / "fully running"</td><td>It promises a testnet app. The current build is a simulator only, so either build it or change the claim.</td></tr>
+<tr><td>§1 Problem</td><td>Add local sources: Greensboro investor-purchase share and East Greensboro homeownership rates. The 45% vs 74% gap is national. Cite the source on the slide.</td></tr>
+<tr><td>§1 Solution 2</td><td>"Capped return (for example 1.4x)": change the example to 1.25×.</td></tr>
+<tr><td>§2 Personas</td><td>Tasha's "path to a down payment" needs the lease-purchase redesign.</td></tr>
+<tr><td>§2 Access tiers</td><td>Any .edu email qualifies, not just HBCUs. Decide whether that's intended.</td></tr>
+<tr><td>§3.1 Onboarding</td><td>The investor quiz and KYC aren't in the app yet. A clickable mock is enough for the demo.</td></tr>
+<tr><td>§3.3 Escrow</td><td>Must be a bank or broker-dealer under Reg CF. Add the 48-hour cancel right.</td></tr>
+<tr><td>§3.5 Notification</td><td>"You earned $0.06" may feel small. Show the cumulative total and the progress toward the exit value.</td></tr>
+<tr><td>§3.6 Governance</td><td>Define "member." Quadratic voting needs identity-linked balances, and it should say so.</td></tr>
+<tr><td>§3.7 Rewards</td><td>Fee discount conflicts with §6.8.</td></tr>
+<tr><td>§3.9 Rent-to-own</td><td>Funding source breaks the platform fee or the reserve rule. Replace it.</td></tr>
+<tr><td>§3.11 Marketplace</td><td>Needs a registered trading platform partner.</td></tr>
+<tr><td>§3.13 Eyesore</td><td>Make this the core model. Add the fairness explanation for the as-is vs ARV gap.</td></tr>
+<tr><td>§3.13 Structure C</td><td>53% family stake conflicts with caps and the local floor. Add an explicit exception rule.</td></tr>
+<tr><td>§3.14 Charter</td><td>"Per-wallet cap" in the presets table vs "caps per identity" in the text: use per identity.</td></tr>
+<tr><td>§3.15 Stewards</td><td>Good. Make the steward a required Treasury signer.</td></tr>
+<tr><td>§4.4 Story step 4</td><td>"500 neighbors × $10" doesn't fund $150k (already fixed in the app).</td></tr>
+<tr><td>§5.3 Impact</td><td>"Homes kept affordable" at 30% of AMI is too easy to pass. Use neighborhood income.</td></tr>
+<tr><td>§6.1</td><td>Add closing, offering, legal, CPA and admin costs. Taxes + insurance of $200 may be low.</td></tr>
+<tr><td>§6.2</td><td>~20% APR. Use 4% / 1.25×.</td></tr>
+<tr><td>§6.3 Fund</td><td>Change to direct ownership of homes (investment company issue).</td></tr>
+<tr><td>§6.5</td><td>Replace with lease-purchase credit.</td></tr>
+<tr><td>§6.8</td><td>The 3% raise fee isn't in sources and uses. Add licensing and grants as revenue.</td></tr>
+<tr><td>§7 Treasury</td><td>2-of-3 lets the manager and OwnTheBlock act without the community. Require the steward.</td></tr>
+<tr><td>§7 Raise</td><td>Commitments-and-mint design for production. Add cancel().</td></tr>
+<tr><td>§9.1</td><td>Add: registered transfer agent, Form C-AR yearly, CPA review threshold, investment company exclusion.</td></tr>
+<tr><td>§9.4</td><td>10% non-resident cap conflicts with the 2% Charter example. Clarify that the Charter overrides the default.</td></tr>
+<tr><td>§11.4</td><td>Answers are good but too short. Use Section 11 of this playbook.</td></tr>
+<tr><td>§11.5</td><td>"You don't have to answer every scenario": use sparingly with judges.</td></tr>
+</table>
+
+<!-- ===================================================== 13 -->
+<h1>13. Brainstorm: ways to make it better</h1>
+<p>Ranked by how much each idea strengthens the pitch for the effort.</p>
+
+<h3>1. One Block Fund LLC that owns homes directly <span class="tag p0">high impact</span></h3>
+<p>Instead of one LLC per house plus a fund that holds their tokens, form one fund LLC per neighborhood that owns every house directly. Investors can still "back" a specific house through an earmark, or each house can be a series.</p>
+<p><b>Solves:</b> the investment company problem, the K-1 cost (one form per investor), admin costs ($250 → $80 a month per house) and single-house risk.</p>
+<p><b>Trade-off:</b> it feels less like "I own 1204 Sample St." Fix that with the earmark and photos.</p>
+
+<h3>2. Make Rescue the Eyesore the main model <span class="tag p0">high impact</span></h3>
+<p>Buying below repaired value is what makes the numbers work: ~8.7% instead of ~3.5%. It's also the best story: the boarded-up house next to Ms. Jenkins. Rename the pitch around it, e.g. "Fix the block, own the block."</p>
+
+<h3>3. Real testnet contracts with a judge-proof demo <span class="tag p0">high impact</span></h3>
+<p>Coinbase Smart Wallet (passkey) + paymaster + MockUSDC + Raise + Distributor on Base Sepolia. Let a judge scan a QR code, get test dollars, buy 1 token and see it on the explorer in under 60 seconds.</p>
+
+<h3>4. Lease-purchase instead of 2% tokens <span class="tag p0">high impact</span></h3>
+<ul>
+  <li>At move-in, the tenant gets an option to buy at today's appraisal + 3% a year, exercisable in years 3–7.</li>
+  <li>$100 of each month's rent goes into a down-payment credit (counted as an operating cost: it lowers investor yield by about 0.8 points).</li>
+  <li>Stack it with NC Housing Finance Agency down-payment assistance and rent reporting to credit bureaus.</li>
+  <li><b>Why it's better:</b> a real path to ownership in 3–5 years (not 88), and the tenant buying out the investors gives investors a planned exit.</li>
+</ul>
+
+<h3>5. Rent history as a portable credential <span class="tag p1">medium-high</span></h3>
+<p>Record each on-time payment as an attestation on Base through the Ethereum Attestation Service (EAS). The tenant owns a verifiable rent record they can show any lender. It's a blockchain use a database can't easily copy, and it fits "build credit."</p>
+
+<h3>6. First-loss capital from banks, foundations and HBCUs <span class="tag p1">medium-high</span></h3>
+<p>Banks must invest in low- and moderate-income communities under the Community Reinvestment Act. A bank putting $50k of first-loss capital behind resident investors is a clean, believable story. Also: foundation impact investments, city housing funds, HBCU endowment impact allocations.</p>
+
+<h3>7. Software licensing to land trusts, CDCs and cities <span class="tag p1">medium-high</span></h3>
+<p>The business model fix. These groups already own properties but can't take $10 investments from residents. OwnTheBlock becomes their engine, revenue doesn't come from residents, and it scales through partners.</p>
+
+<h3>8. $10-a-month auto-invest and round-ups <span class="tag p1">medium</span></h3>
+<p>Turns $0.68 into a habit. Show the 5-year projection for $10, $25 and $40 a month in the app.</p>
+
+<h3>9. Validation you can put on a slide <span class="tag p1">medium</span></h3>
+<ul>
+  <li>A 10-question survey of 50+ residents and students: would you invest $10? What worries you?</li>
+  <li>One letter of interest from a homeowner or heir family and one from a business owner.</li>
+  <li>A meeting request to a local neighborhood group, an A&amp;T real estate or business program, or the city's housing department.</li>
+</ul>
+
+<h3>10. Permanent affordability through a land trust partnership <span class="tag p2">medium</span></h3>
+<p>A community land trust owns the land and investors own the building. Resale prices are limited, so homes stay affordable forever. It's a strong answer to "aren't you just speeding up gentrification?"</p>
+
+<h3>11. Demo polish <span class="tag p2">quick wins</span></h3>
+<ul>
+  <li>Rename streets: "Sample St" → a believable fictional name.</li>
+  <li>An honest-numbers toggle in the simulator: "Spec / Real costs / Distressed."</li>
+  <li>A Charter screen showing the three presets and a rejected transfer ("blocked: would exceed 2% cap").</li>
+  <li>A governance proposal screen with a live vote.</li>
+  <li>Spanish on the welcome and invest screens.</li>
+  <li>A Cancel commitment button and a sources-and-uses table on every project page.</li>
+</ul>
+
+<h3>12. Safety-first investing <span class="tag p2">medium</span></h3>
+<p>Before a first investment, ask "Do you have $500 saved for emergencies?" If not, suggest a savings goal first. That fits the education mission and protects the most vulnerable users.</p>
+
+<h3>13. Bridge fund for fast purchases <span class="tag p2">later</span></h3>
+<p>A small pool (from first-loss partners) buys foreclosures and tax-sale homes quickly, and the community raise refinances it within 6 months. It opens up the cheapest homes.</p>
+
+<!-- ===================================================== 14 -->
+<h1>14. Roadmap to fully functioning</h1>
+<p>Two tracks run side by side: the <b>build track</b> (a working testnet app for the competition) and the <b>real-world track</b> (the pilot with real money).</p>
+
+<h2>Build track: about 6 weeks</h2>
+<table>
+<tr><th>Week</th><th>Build</th><th>Done when</th></tr>
+<tr><td>1</td><td><b>Fix the numbers.</b> Add full sources and uses and the distressed-home case to <code>lib/finance</code> and <code>lib/demo.ts</code>. Compute fund NAV. Remove fixed impact numbers. Business terms 4% / 1.25×. Replace rent-to-own with lease-purchase. Rename streets. <b>Deploy to Vercel.</b></td><td>Tests updated and passing; public URL works on a phone</td></tr>
+<tr><td>2</td><td><b>Contracts (Milestone 3, core).</b> Foundry project in <code>contracts/</code>: MockUSDC (faucet), IdentityRegistry, AssetToken (permissioned + lockup + caps), Raise (commit, cancel, finalize, refund), Distributor (deposit with report hash, claim).</td><td>Foundry tests + fuzz test "claims ≤ deposits" pass</td></tr>
+<tr><td>3</td><td><b>Deploy + governance contracts.</b> Deploy to Base Sepolia and verify source. Add RulesRegistry (timelock), CommunityGovernor, Treasury (steward required). Script the full lifecycle: register → raise → finalize → deposit → claim → vote.</td><td>Addresses in README; lifecycle script runs</td></tr>
+<tr><td>4</td><td><b>Wallet + live mode (Milestone 4).</b> OnchainKit with Coinbase Smart Wallet (passkey), paymaster, "Get test dollars," real invest and claim behind the same <code>lib/world</code> actions. "Live testnet" toggle with real explorer links.</td><td>A new user on a phone signs up, invests $10 and claims, with no gas prompt</td></tr>
+<tr><td>5</td><td><b>Transparency + community (Milestone 5).</b> Money Trail links to real transactions and document hashes, Charter screen with a rejected-transfer demo, proposal + vote screen, EAS rent attestation demo, badges.</td><td>Every Money Trail step links to a transaction or document</td></tr>
+<tr><td>6</td><td><b>Polish + rehearse.</b> Spanish for key screens, accessibility pass, Playwright run on a phone-sized screen, pitch deck, 3 full demo run-throughs.</td><td>Demo runs start to finish 3 times with no errors</td></tr>
+</table>
+
+<h2>Real-world track: pilot (about 12–18 months)</h2>
+<table>
+<tr><th>When</th><th>Milestone</th></tr>
+<tr><td>Months 0–3</td><td>Form the public benefit corporation. Engage a securities attorney (or a law school clinic). Talk to 2–3 funding portals and a transfer agent. Resident survey and block meetings. Recruit a steward. Apply for grants and pitch competitions.</td></tr>
+<tr><td>Months 3–6</td><td>Fund LLC and Charter template finished. First-loss partner letter. Source the first distressed home with a steward (city program or heirs' family). Title, appraisal, bids.</td></tr>
+<tr><td>Months 6–9</td><td>Form C filed. Raise opens with local-first windows. Sign-up nights. Contracts audited and deployed to Base mainnet (only after audit).</td></tr>
+<tr><td>Months 9–12</td><td>Close, renovate in stages, lease up with lease-purchase option.</td></tr>
+<tr><td>Months 12–18</td><td>First payouts. First quarterly transparency report. Second home + first business deal. Publish impact results.</td></tr>
+</table>
+
+<!-- ===================================================== 15 -->
+<h1>15. Pre-competition checklist</h1>
+<table>
+<tr><th>✓</th><th>Item</th></tr>
+<tr><td>☐</td><td>App deployed to a public URL; QR code on the title slide</td></tr>
+<tr><td>☐</td><td>At least one real Base Sepolia transaction shown live (buy and claim)</td></tr>
+<tr><td>☐</td><td>Honest returns slide: full price ~3.5% vs distressed ~8.7%</td></tr>
+<tr><td>☐</td><td>Sources-and-uses table for the example house</td></tr>
+<tr><td>☐</td><td>Jasmine's $100 timeline (Section 7) as one slide</td></tr>
+<tr><td>☐</td><td>Lease-purchase replaces 2% tenant tokens everywhere (app, deck, spec)</td></tr>
+<tr><td>☐</td><td>Business terms changed to 4% / 1.25×; merchant cash advance comparison</td></tr>
+<tr><td>☐</td><td>Legal slide: bank escrow, transfer agent, fund owns homes directly, no peer-to-peer trading in the pilot</td></tr>
+<tr><td>☐</td><td>Treasury: steward signature required</td></tr>
+<tr><td>☐</td><td>One piece of real validation (survey results, an LOI or a partner meeting)</td></tr>
+<tr><td>☐</td><td>Placeholder street names replaced</td></tr>
+<tr><td>☐</td><td>Every <span class="tag fix">FIX FIRST</span> question in Section 11 now has an answer</td></tr>
+<tr><td>☐</td><td>Rehearsed the five toughest questions out loud: #1, #2, #14, #23, #25</td></tr>
+<tr><td>☐</td><td>All "verify" numbers checked (Reg CF thresholds, Guilford tax rate, insurance, portal fees)</td></tr>
+</table>
+
+<!-- ===================================================== 16 -->
+<h1>16. Glossary</h1>
+<table>
+<tr><th>Term</th><th>Plain-English meaning</th></tr>
+<tr><td>LLC</td><td>Limited liability company. The legal owner of the house. Investors own units of it (tokens).</td></tr>
+<tr><td>Token</td><td>A digital record of one LLC unit, kept on the blockchain. $10 each.</td></tr>
+<tr><td>Reg CF</td><td>Regulation Crowdfunding: the federal rule that lets ordinary people invest small amounts in private companies through a registered portal.</td></tr>
+<tr><td>Form C / Form C-AR</td><td>The offering document filed with the SEC / the yearly update afterward.</td></tr>
+<tr><td>Funding portal</td><td>An SEC- and FINRA-registered website that hosts Reg CF offerings.</td></tr>
+<tr><td>Transfer agent</td><td>A registered company that keeps the official list of who owns the securities.</td></tr>
+<tr><td>Escrow</td><td>Money held by a neutral party until a condition is met (here: the raise goal).</td></tr>
+<tr><td>ARV</td><td>After-repair value: what the house will be worth once fixed.</td></tr>
+<tr><td>Cash yield</td><td>Yearly cash payouts ÷ amount invested.</td></tr>
+<tr><td>IRR / yearly return</td><td>One yearly percentage that counts both the monthly payouts and the final sale.</td></tr>
+<tr><td>NAV</td><td>Net asset value: what each fund token is worth = (cash + holdings) ÷ tokens.</td></tr>
+<tr><td>Revenue share / cap</td><td>The business pays a % of sales until investors receive a set multiple (e.g. 1.25×).</td></tr>
+<tr><td>First-loss partner</td><td>An organization that agrees to absorb the first losses, protecting small investors.</td></tr>
+<tr><td>Steward</td><td>A trusted local organization with a governance seat and veto over affordability rules.</td></tr>
+<tr><td>Charter</td><td>Each neighborhood's rules (who invests, caps, votes, rent cap), enforced by smart contracts.</td></tr>
+<tr><td>Multisig</td><td>A wallet that needs several people to sign before money moves.</td></tr>
+<tr><td>Timelock</td><td>A forced waiting period before a rule change takes effect.</td></tr>
+<tr><td>Paymaster</td><td>A service that pays blockchain fees for the user.</td></tr>
+<tr><td>USDC</td><td>A regulated digital dollar (stablecoin) worth $1.</td></tr>
+<tr><td>Base / Base Sepolia</td><td>Coinbase's low-cost blockchain network / its free test version.</td></tr>
+<tr><td>EAS</td><td>Ethereum Attestation Service: a standard way to record verifiable statements (like "rent paid on time") on-chain.</td></tr>
+<tr><td>CRA</td><td>Community Reinvestment Act: a federal law that requires banks to invest in low- and moderate-income communities.</td></tr>
+<tr><td>ATS</td><td>Alternative trading system: a registered platform where private securities can be resold legally.</td></tr>
+<tr><td>K-1 / 1099-DIV</td><td>Tax forms investors receive from a partnership / from a corporation or REIT.</td></tr>
+</table>
+<p class="footer-note">Figures are planning estimates computed from the spec's inputs plus the stated assumptions. They aren't legal, tax or investment advice. Verify with a securities attorney and a CPA before using real money.</p>
+
+</body>
+</html>
