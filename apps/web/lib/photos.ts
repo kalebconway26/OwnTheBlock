@@ -17,4 +17,4 @@ export const PHOTO_CREDITS: Record<string, { title: string; creator: string; lic
   "bungalow-3": { title: "Doctor Fenton Adams House, Southern Avenue, Latonia, Covington, KY", creator: "w_lemay", license: "CC BY-SA 2.0", source: "https://www.flickr.com/photos/59081381@N03/52352791242" },
 };
 
-export const photo = (key: string) => `/photos/${key}.jpg`;
+export const photo = (key: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/photos/${key}.jpg`;
